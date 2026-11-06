@@ -1,25 +1,961 @@
-month,region,product,revenue,cost,units
-2026-01,North,Trail Helmet,18400,10120,230
-2026-01,South,Trail Helmet,15200,8360,190
-2026-01,East,Commuter Bike,46800,32760,36
-2026-01,West,Commuter Bike,53300,37310,41
-2026-02,North,Trail Helmet,20160,11088,252
-2026-02,South,Trail Helmet,16960,9328,212
-2026-02,East,Commuter Bike,49400,34580,38
-2026-02,West,Commuter Bike,57200,40040,44
-2026-03,North,Trail Helmet,21600,11880,270
-2026-03,South,Trail Helmet,18000,9900,225
-2026-03,East,Commuter Bike,52000,36400,40
-2026-03,West,Commuter Bike,61100,42770,47
-2026-04,North,Trail Helmet,23200,12760,290
-2026-04,South,Trail Helmet,19200,10560,240
-2026-04,East,Commuter Bike,55900,39130,43
-2026-04,West,Commuter Bike,65000,45500,50
-2026-05,North,Trail Helmet,24800,13640,310
-2026-05,South,Trail Helmet,20800,11440,260
-2026-05,East,Commuter Bike,59800,41860,46
-2026-05,West,Commuter Bike,68900,48230,53
-2026-06,North,Trail Helmet,26400,14520,330
-2026-06,South,Trail Helmet,22400,12320,280
-2026-06,East,Commuter Bike,63700,44590,49
-2026-06,West,Commuter Bike,72800,50960,56
+month,region,product,revenue,cost,units,product_id,category,unit_price,unit_cost
+2026-01,North,SolarGuard SPF 50 Face Lotion,949.50,550.50,50,PHR-0001,Sun Protection,18.99,11.01
+2026-01,North,SunShield SPF 30 Body Spray,753.48,436.80,52,PHR-0002,Sun Protection,14.49,8.40
+2026-01,North,Mineral Defense SPF 40 Cream,1174.50,681.48,54,PHR-0003,Sun Protection,21.75,12.62
+2026-01,North,Kids SunSafe SPF 50 Lotion,910.00,528.08,56,PHR-0004,Sun Protection,16.25,9.43
+2026-01,North,Daily UV Defense SPF 25 Moisturizer,1032.40,598.56,58,PHR-0005,Sun Protection,17.80,10.32
+2026-01,North,SportBlock SPF 50 Gel,1176.00,682.20,60,PHR-0006,Sun Protection,19.60,11.37
+2026-01,North,Clear Face SPF 35 Fluid,1370.20,794.84,62,PHR-0007,Sun Protection,22.10,12.82
+2026-01,North,After Sun Cooling Aloe Gel,764.80,443.52,64,PHR-0008,Sun Protection,11.95,6.93
+2026-01,North,Lip Protect SPF 30 Balm,379.50,220.44,66,PHR-0009,Sun Protection,5.75,3.34
+2026-01,North,UltraLight SPF 45 Mist,1081.20,626.96,68,PHR-0010,Sun Protection,15.90,9.22
+2026-01,North,ColdEase Daytime Capsules,2562.30,1587.60,270,PHR-0011,Cold and Flu,9.49,5.88
+2026-01,North,ColdEase Nighttime Syrup,2880.25,1787.16,281,PHR-0012,Cold and Flu,10.25,6.36
+2026-01,North,BreatheFree Nasal Spray,2555.00,1585.56,292,PHR-0013,Cold and Flu,8.75,5.43
+2026-01,North,ThroatCalm Honey Lozenges,1932.80,1198.94,302,PHR-0014,Cold and Flu,6.40,3.97
+2026-01,North,FluRelief Multi-Symptom Tablets,3943.80,2444.53,313,PHR-0015,Cold and Flu,12.60,7.81
+2026-01,North,ChestClear Expectorant Syrup,3661.20,2271.24,324,PHR-0016,Cold and Flu,11.30,7.01
+2026-01,North,SinusComfort Caplets,3333.25,2066.95,335,PHR-0017,Cold and Flu,9.95,6.17
+2026-01,North,Junior Fever and Cold Liquid,2837.20,1757.68,346,PHR-0018,Cold and Flu,8.20,5.08
+2026-01,North,Menthol Comfort Vapor Rub,2545.40,1577.08,356,PHR-0019,Cold and Flu,7.15,4.43
+2026-01,North,Rapid Relief Cough Drops,1779.95,1104.67,367,PHR-0020,Cold and Flu,4.85,3.01
+2026-01,North,HydraSilk Daily Face Cream,1960.00,1019.20,80,PHR-0021,Cosmetics,24.50,12.74
+2026-01,North,Velvet Matte Foundation - Medium,2261.75,1176.11,83,PHR-0022,Cosmetics,27.25,14.17
+2026-01,North,GentleGlow Facial Cleanser,1182.50,614.90,86,PHR-0023,Cosmetics,13.75,7.15
+2026-01,North,Renewal Retinol Night Serum,2961.00,1539.90,90,PHR-0024,Cosmetics,32.90,17.11
+2026-01,North,Botanical Rose Lip Tint,1153.20,599.85,93,PHR-0025,Cosmetics,12.40,6.45
+2026-01,North,Brightening Vitamin C Serum,2841.60,1477.44,96,PHR-0026,Cosmetics,29.60,15.39
+2026-01,North,SoftTouch Micellar Water,1084.05,563.31,99,PHR-0027,Cosmetics,10.95,5.69
+2026-01,North,Nourishing Shea Body Lotion,1560.60,811.92,102,PHR-0028,Cosmetics,15.30,7.96
+2026-01,North,Precision Volume Mascara,1961.00,1019.72,106,PHR-0029,Cosmetics,18.50,9.62
+2026-01,North,Calming Oat Facial Mask,1831.20,952.66,109,PHR-0030,Cosmetics,16.80,8.74
+2026-01,North,Daily Complete Multivitamin,2440.80,1464.48,144,PHR-0031,Vitamins,16.95,10.17
+2026-01,North,Vitamin D3 2000 IU Softgels,1717.50,1030.50,150,PHR-0032,Vitamins,11.45,6.87
+2026-01,North,Vitamin C 1000 mg Tablets,2059.20,1235.52,156,PHR-0033,Vitamins,13.20,7.92
+2026-01,North,Omega-3 Fish Oil Softgels,3179.75,1907.85,161,PHR-0034,Vitamins,19.75,11.85
+2026-01,North,Iron Plus Folic Acid Tablets,2145.95,1287.57,167,PHR-0035,Vitamins,12.85,7.71
+2026-01,North,Calcium Magnesium Zinc Caplets,2698.80,1619.28,173,PHR-0036,Vitamins,15.60,9.36
+2026-01,North,B-Complex Energy Capsules,2550.75,1530.45,179,PHR-0037,Vitamins,14.25,8.55
+2026-01,North,Kids Berry Multivitamin Gummies,3201.60,1920.96,184,PHR-0038,Vitamins,17.40,10.44
+2026-01,North,Biotin 5000 mcg Tablets,2033.00,1219.80,190,PHR-0039,Vitamins,10.70,6.42
+2026-01,North,Prenatal Complete Capsules,4174.80,2504.88,196,PHR-0040,Vitamins,21.30,12.78
+2026-01,South,SolarGuard SPF 50 Face Lotion,854.55,495.45,45,PHR-0001,Sun Protection,18.99,11.01
+2026-01,South,SunShield SPF 30 Body Spray,681.03,394.80,47,PHR-0002,Sun Protection,14.49,8.40
+2026-01,South,Mineral Defense SPF 40 Cream,1065.75,618.38,49,PHR-0003,Sun Protection,21.75,12.62
+2026-01,South,Kids SunSafe SPF 50 Lotion,812.50,471.50,50,PHR-0004,Sun Protection,16.25,9.43
+2026-01,South,Daily UV Defense SPF 25 Moisturizer,925.60,536.64,52,PHR-0005,Sun Protection,17.80,10.32
+2026-01,South,SportBlock SPF 50 Gel,1058.40,613.98,54,PHR-0006,Sun Protection,19.60,11.37
+2026-01,South,Clear Face SPF 35 Fluid,1237.60,717.92,56,PHR-0007,Sun Protection,22.10,12.82
+2026-01,South,After Sun Cooling Aloe Gel,693.10,401.94,58,PHR-0008,Sun Protection,11.95,6.93
+2026-01,South,Lip Protect SPF 30 Balm,339.25,197.06,59,PHR-0009,Sun Protection,5.75,3.34
+2026-01,South,UltraLight SPF 45 Mist,969.90,562.42,61,PHR-0010,Sun Protection,15.90,9.22
+2026-01,South,ColdEase Daytime Capsules,2306.07,1428.84,243,PHR-0011,Cold and Flu,9.49,5.88
+2026-01,South,ColdEase Nighttime Syrup,2593.25,1609.08,253,PHR-0012,Cold and Flu,10.25,6.36
+2026-01,South,BreatheFree Nasal Spray,2292.50,1422.66,262,PHR-0013,Cold and Flu,8.75,5.43
+2026-01,South,ThroatCalm Honey Lozenges,1740.80,1079.84,272,PHR-0014,Cold and Flu,6.40,3.97
+2026-01,South,FluRelief Multi-Symptom Tablets,3553.20,2202.42,282,PHR-0015,Cold and Flu,12.60,7.81
+2026-01,South,ChestClear Expectorant Syrup,3299.60,2046.92,292,PHR-0016,Cold and Flu,11.30,7.01
+2026-01,South,SinusComfort Caplets,2994.95,1857.17,301,PHR-0017,Cold and Flu,9.95,6.17
+2026-01,South,Junior Fever and Cold Liquid,2550.20,1579.88,311,PHR-0018,Cold and Flu,8.20,5.08
+2026-01,South,Menthol Comfort Vapor Rub,2295.15,1422.03,321,PHR-0019,Cold and Flu,7.15,4.43
+2026-01,South,Rapid Relief Cough Drops,1600.50,993.30,330,PHR-0020,Cold and Flu,4.85,3.01
+2026-01,South,HydraSilk Daily Face Cream,1764.00,917.28,72,PHR-0021,Cosmetics,24.50,12.74
+2026-01,South,Velvet Matte Foundation - Medium,2043.75,1062.75,75,PHR-0022,Cosmetics,27.25,14.17
+2026-01,South,GentleGlow Facial Cleanser,1072.50,557.70,78,PHR-0023,Cosmetics,13.75,7.15
+2026-01,South,Renewal Retinol Night Serum,2664.90,1385.91,81,PHR-0024,Cosmetics,32.90,17.11
+2026-01,South,Botanical Rose Lip Tint,1041.60,541.80,84,PHR-0025,Cosmetics,12.40,6.45
+2026-01,South,Brightening Vitamin C Serum,2545.60,1323.54,86,PHR-0026,Cosmetics,29.60,15.39
+2026-01,South,SoftTouch Micellar Water,974.55,506.41,89,PHR-0027,Cosmetics,10.95,5.69
+2026-01,South,Nourishing Shea Body Lotion,1407.60,732.32,92,PHR-0028,Cosmetics,15.30,7.96
+2026-01,South,Precision Volume Mascara,1757.50,913.90,95,PHR-0029,Cosmetics,18.50,9.62
+2026-01,South,Calming Oat Facial Mask,1646.40,856.52,98,PHR-0030,Cosmetics,16.80,8.74
+2026-01,South,Daily Complete Multivitamin,2203.50,1322.10,130,PHR-0031,Vitamins,16.95,10.17
+2026-01,South,Vitamin D3 2000 IU Softgels,1545.75,927.45,135,PHR-0032,Vitamins,11.45,6.87
+2026-01,South,Vitamin C 1000 mg Tablets,1848.00,1108.80,140,PHR-0033,Vitamins,13.20,7.92
+2026-01,South,Omega-3 Fish Oil Softgels,2863.75,1718.25,145,PHR-0034,Vitamins,19.75,11.85
+2026-01,South,Iron Plus Folic Acid Tablets,1927.50,1156.50,150,PHR-0035,Vitamins,12.85,7.71
+2026-01,South,Calcium Magnesium Zinc Caplets,2433.60,1460.16,156,PHR-0036,Vitamins,15.60,9.36
+2026-01,South,B-Complex Energy Capsules,2294.25,1376.55,161,PHR-0037,Vitamins,14.25,8.55
+2026-01,South,Kids Berry Multivitamin Gummies,2888.40,1733.04,166,PHR-0038,Vitamins,17.40,10.44
+2026-01,South,Biotin 5000 mcg Tablets,1829.70,1097.82,171,PHR-0039,Vitamins,10.70,6.42
+2026-01,South,Prenatal Complete Capsules,3748.80,2249.28,176,PHR-0040,Vitamins,21.30,12.78
+2026-01,East,SolarGuard SPF 50 Face Lotion,1044.45,605.55,55,PHR-0001,Sun Protection,18.99,11.01
+2026-01,East,SunShield SPF 30 Body Spray,825.93,478.80,57,PHR-0002,Sun Protection,14.49,8.40
+2026-01,East,Mineral Defense SPF 40 Cream,1283.25,744.58,59,PHR-0003,Sun Protection,21.75,12.62
+2026-01,East,Kids SunSafe SPF 50 Lotion,1007.50,584.66,62,PHR-0004,Sun Protection,16.25,9.43
+2026-01,East,Daily UV Defense SPF 25 Moisturizer,1139.20,660.48,64,PHR-0005,Sun Protection,17.80,10.32
+2026-01,East,SportBlock SPF 50 Gel,1293.60,750.42,66,PHR-0006,Sun Protection,19.60,11.37
+2026-01,East,Clear Face SPF 35 Fluid,1502.80,871.76,68,PHR-0007,Sun Protection,22.10,12.82
+2026-01,East,After Sun Cooling Aloe Gel,836.50,485.10,70,PHR-0008,Sun Protection,11.95,6.93
+2026-01,East,Lip Protect SPF 30 Balm,419.75,243.82,73,PHR-0009,Sun Protection,5.75,3.34
+2026-01,East,UltraLight SPF 45 Mist,1192.50,691.50,75,PHR-0010,Sun Protection,15.90,9.22
+2026-01,East,ColdEase Daytime Capsules,2818.53,1746.36,297,PHR-0011,Cold and Flu,9.49,5.88
+2026-01,East,ColdEase Nighttime Syrup,3167.25,1965.24,309,PHR-0012,Cold and Flu,10.25,6.36
+2026-01,East,BreatheFree Nasal Spray,2808.75,1743.03,321,PHR-0013,Cold and Flu,8.75,5.43
+2026-01,East,ThroatCalm Honey Lozenges,2131.20,1322.01,333,PHR-0014,Cold and Flu,6.40,3.97
+2026-01,East,FluRelief Multi-Symptom Tablets,4347.00,2694.45,345,PHR-0015,Cold and Flu,12.60,7.81
+2026-01,East,ChestClear Expectorant Syrup,4022.80,2495.56,356,PHR-0016,Cold and Flu,11.30,7.01
+2026-01,East,SinusComfort Caplets,3661.60,2270.56,368,PHR-0017,Cold and Flu,9.95,6.17
+2026-01,East,Junior Fever and Cold Liquid,3116.00,1930.40,380,PHR-0018,Cold and Flu,8.20,5.08
+2026-01,East,Menthol Comfort Vapor Rub,2802.80,1736.56,392,PHR-0019,Cold and Flu,7.15,4.43
+2026-01,East,Rapid Relief Cough Drops,1959.40,1216.04,404,PHR-0020,Cold and Flu,4.85,3.01
+2026-01,East,HydraSilk Daily Face Cream,2156.00,1121.12,88,PHR-0021,Cosmetics,24.50,12.74
+2026-01,East,Velvet Matte Foundation - Medium,2507.00,1303.64,92,PHR-0022,Cosmetics,27.25,14.17
+2026-01,East,GentleGlow Facial Cleanser,1306.25,679.25,95,PHR-0023,Cosmetics,13.75,7.15
+2026-01,East,Renewal Retinol Night Serum,3257.10,1693.89,99,PHR-0024,Cosmetics,32.90,17.11
+2026-01,East,Botanical Rose Lip Tint,1264.80,657.90,102,PHR-0025,Cosmetics,12.40,6.45
+2026-01,East,Brightening Vitamin C Serum,3137.60,1631.34,106,PHR-0026,Cosmetics,29.60,15.39
+2026-01,East,SoftTouch Micellar Water,1193.55,620.21,109,PHR-0027,Cosmetics,10.95,5.69
+2026-01,East,Nourishing Shea Body Lotion,1728.90,899.48,113,PHR-0028,Cosmetics,15.30,7.96
+2026-01,East,Precision Volume Mascara,2146.00,1115.92,116,PHR-0029,Cosmetics,18.50,9.62
+2026-01,East,Calming Oat Facial Mask,2016.00,1048.80,120,PHR-0030,Cosmetics,16.80,8.74
+2026-01,East,Daily Complete Multivitamin,2678.10,1606.86,158,PHR-0031,Vitamins,16.95,10.17
+2026-01,East,Vitamin D3 2000 IU Softgels,1889.25,1133.55,165,PHR-0032,Vitamins,11.45,6.87
+2026-01,East,Vitamin C 1000 mg Tablets,2257.20,1354.32,171,PHR-0033,Vitamins,13.20,7.92
+2026-01,East,Omega-3 Fish Oil Softgels,3495.75,2097.45,177,PHR-0034,Vitamins,19.75,11.85
+2026-01,East,Iron Plus Folic Acid Tablets,2364.40,1418.64,184,PHR-0035,Vitamins,12.85,7.71
+2026-01,East,Calcium Magnesium Zinc Caplets,2964.00,1778.40,190,PHR-0036,Vitamins,15.60,9.36
+2026-01,East,B-Complex Energy Capsules,2793.00,1675.80,196,PHR-0037,Vitamins,14.25,8.55
+2026-01,East,Kids Berry Multivitamin Gummies,3532.20,2119.32,203,PHR-0038,Vitamins,17.40,10.44
+2026-01,East,Biotin 5000 mcg Tablets,2236.30,1341.78,209,PHR-0039,Vitamins,10.70,6.42
+2026-01,East,Prenatal Complete Capsules,4579.50,2747.70,215,PHR-0040,Vitamins,21.30,12.78
+2026-01,West,SolarGuard SPF 50 Face Lotion,1139.40,660.60,60,PHR-0001,Sun Protection,18.99,11.01
+2026-01,West,SunShield SPF 30 Body Spray,898.38,520.80,62,PHR-0002,Sun Protection,14.49,8.40
+2026-01,West,Mineral Defense SPF 40 Cream,1413.75,820.30,65,PHR-0003,Sun Protection,21.75,12.62
+2026-01,West,Kids SunSafe SPF 50 Lotion,1088.75,631.81,67,PHR-0004,Sun Protection,16.25,9.43
+2026-01,West,Daily UV Defense SPF 25 Moisturizer,1246.00,722.40,70,PHR-0005,Sun Protection,17.80,10.32
+2026-01,West,SportBlock SPF 50 Gel,1411.20,818.64,72,PHR-0006,Sun Protection,19.60,11.37
+2026-01,West,Clear Face SPF 35 Fluid,1635.40,948.68,74,PHR-0007,Sun Protection,22.10,12.82
+2026-01,West,After Sun Cooling Aloe Gel,920.15,533.61,77,PHR-0008,Sun Protection,11.95,6.93
+2026-01,West,Lip Protect SPF 30 Balm,454.25,263.86,79,PHR-0009,Sun Protection,5.75,3.34
+2026-01,West,UltraLight SPF 45 Mist,1303.80,756.04,82,PHR-0010,Sun Protection,15.90,9.22
+2026-01,West,ColdEase Daytime Capsules,3074.76,1905.12,324,PHR-0011,Cold and Flu,9.49,5.88
+2026-01,West,ColdEase Nighttime Syrup,3454.25,2143.32,337,PHR-0012,Cold and Flu,10.25,6.36
+2026-01,West,BreatheFree Nasal Spray,3062.50,1900.50,350,PHR-0013,Cold and Flu,8.75,5.43
+2026-01,West,ThroatCalm Honey Lozenges,2323.20,1441.11,363,PHR-0014,Cold and Flu,6.40,3.97
+2026-01,West,FluRelief Multi-Symptom Tablets,4737.60,2936.56,376,PHR-0015,Cold and Flu,12.60,7.81
+2026-01,West,ChestClear Expectorant Syrup,4395.70,2726.89,389,PHR-0016,Cold and Flu,11.30,7.01
+2026-01,West,SinusComfort Caplets,3999.90,2480.34,402,PHR-0017,Cold and Flu,9.95,6.17
+2026-01,West,Junior Fever and Cold Liquid,3403.00,2108.20,415,PHR-0018,Cold and Flu,8.20,5.08
+2026-01,West,Menthol Comfort Vapor Rub,3060.20,1896.04,428,PHR-0019,Cold and Flu,7.15,4.43
+2026-01,West,Rapid Relief Cough Drops,2138.85,1327.41,441,PHR-0020,Cold and Flu,4.85,3.01
+2026-01,West,HydraSilk Daily Face Cream,2352.00,1223.04,96,PHR-0021,Cosmetics,24.50,12.74
+2026-01,West,Velvet Matte Foundation - Medium,2725.00,1417.00,100,PHR-0022,Cosmetics,27.25,14.17
+2026-01,West,GentleGlow Facial Cleanser,1430.00,743.60,104,PHR-0023,Cosmetics,13.75,7.15
+2026-01,West,Renewal Retinol Night Serum,3553.20,1847.88,108,PHR-0024,Cosmetics,32.90,17.11
+2026-01,West,Botanical Rose Lip Tint,1376.40,715.95,111,PHR-0025,Cosmetics,12.40,6.45
+2026-01,West,Brightening Vitamin C Serum,3404.00,1769.85,115,PHR-0026,Cosmetics,29.60,15.39
+2026-01,West,SoftTouch Micellar Water,1303.05,677.11,119,PHR-0027,Cosmetics,10.95,5.69
+2026-01,West,Nourishing Shea Body Lotion,1881.90,979.08,123,PHR-0028,Cosmetics,15.30,7.96
+2026-01,West,Precision Volume Mascara,2349.50,1221.74,127,PHR-0029,Cosmetics,18.50,9.62
+2026-01,West,Calming Oat Facial Mask,2200.80,1144.94,131,PHR-0030,Cosmetics,16.80,8.74
+2026-01,West,Daily Complete Multivitamin,2932.35,1759.41,173,PHR-0031,Vitamins,16.95,10.17
+2026-01,West,Vitamin D3 2000 IU Softgels,2061.00,1236.60,180,PHR-0032,Vitamins,11.45,6.87
+2026-01,West,Vitamin C 1000 mg Tablets,2468.40,1481.04,187,PHR-0033,Vitamins,13.20,7.92
+2026-01,West,Omega-3 Fish Oil Softgels,3831.50,2298.90,194,PHR-0034,Vitamins,19.75,11.85
+2026-01,West,Iron Plus Folic Acid Tablets,2570.00,1542.00,200,PHR-0035,Vitamins,12.85,7.71
+2026-01,West,Calcium Magnesium Zinc Caplets,3229.20,1937.52,207,PHR-0036,Vitamins,15.60,9.36
+2026-01,West,B-Complex Energy Capsules,3049.50,1829.70,214,PHR-0037,Vitamins,14.25,8.55
+2026-01,West,Kids Berry Multivitamin Gummies,3845.40,2307.24,221,PHR-0038,Vitamins,17.40,10.44
+2026-01,West,Biotin 5000 mcg Tablets,2439.60,1463.76,228,PHR-0039,Vitamins,10.70,6.42
+2026-01,West,Prenatal Complete Capsules,5005.50,3003.30,235,PHR-0040,Vitamins,21.30,12.78
+2026-02,North,SolarGuard SPF 50 Face Lotion,1139.40,660.60,60,PHR-0001,Sun Protection,18.99,11.01
+2026-02,North,SunShield SPF 30 Body Spray,898.38,520.80,62,PHR-0002,Sun Protection,14.49,8.40
+2026-02,North,Mineral Defense SPF 40 Cream,1413.75,820.30,65,PHR-0003,Sun Protection,21.75,12.62
+2026-02,North,Kids SunSafe SPF 50 Lotion,1088.75,631.81,67,PHR-0004,Sun Protection,16.25,9.43
+2026-02,North,Daily UV Defense SPF 25 Moisturizer,1246.00,722.40,70,PHR-0005,Sun Protection,17.80,10.32
+2026-02,North,SportBlock SPF 50 Gel,1411.20,818.64,72,PHR-0006,Sun Protection,19.60,11.37
+2026-02,North,Clear Face SPF 35 Fluid,1635.40,948.68,74,PHR-0007,Sun Protection,22.10,12.82
+2026-02,North,After Sun Cooling Aloe Gel,920.15,533.61,77,PHR-0008,Sun Protection,11.95,6.93
+2026-02,North,Lip Protect SPF 30 Balm,454.25,263.86,79,PHR-0009,Sun Protection,5.75,3.34
+2026-02,North,UltraLight SPF 45 Mist,1303.80,756.04,82,PHR-0010,Sun Protection,15.90,9.22
+2026-02,North,ColdEase Daytime Capsules,2135.25,1323.00,225,PHR-0011,Cold and Flu,9.49,5.88
+2026-02,North,ColdEase Nighttime Syrup,2398.50,1488.24,234,PHR-0012,Cold and Flu,10.25,6.36
+2026-02,North,BreatheFree Nasal Spray,2126.25,1319.49,243,PHR-0013,Cold and Flu,8.75,5.43
+2026-02,North,ThroatCalm Honey Lozenges,1612.80,1000.44,252,PHR-0014,Cold and Flu,6.40,3.97
+2026-02,North,FluRelief Multi-Symptom Tablets,3288.60,2038.41,261,PHR-0015,Cold and Flu,12.60,7.81
+2026-02,North,ChestClear Expectorant Syrup,3051.00,1892.70,270,PHR-0016,Cold and Flu,11.30,7.01
+2026-02,North,SinusComfort Caplets,2776.05,1721.43,279,PHR-0017,Cold and Flu,9.95,6.17
+2026-02,North,Junior Fever and Cold Liquid,2361.60,1463.04,288,PHR-0018,Cold and Flu,8.20,5.08
+2026-02,North,Menthol Comfort Vapor Rub,2123.55,1315.71,297,PHR-0019,Cold and Flu,7.15,4.43
+2026-02,North,Rapid Relief Cough Drops,1484.10,921.06,306,PHR-0020,Cold and Flu,4.85,3.01
+2026-02,North,HydraSilk Daily Face Cream,1911.00,993.72,78,PHR-0021,Cosmetics,24.50,12.74
+2026-02,North,Velvet Matte Foundation - Medium,2234.50,1161.94,82,PHR-0022,Cosmetics,27.25,14.17
+2026-02,North,GentleGlow Facial Cleanser,1168.75,607.75,85,PHR-0023,Cosmetics,13.75,7.15
+2026-02,North,Renewal Retinol Night Serum,2895.20,1505.68,88,PHR-0024,Cosmetics,32.90,17.11
+2026-02,North,Botanical Rose Lip Tint,1128.40,586.95,91,PHR-0025,Cosmetics,12.40,6.45
+2026-02,North,Brightening Vitamin C Serum,2782.40,1446.66,94,PHR-0026,Cosmetics,29.60,15.39
+2026-02,North,SoftTouch Micellar Water,1062.15,551.93,97,PHR-0027,Cosmetics,10.95,5.69
+2026-02,North,Nourishing Shea Body Lotion,1530.00,796.00,100,PHR-0028,Cosmetics,15.30,7.96
+2026-02,North,Precision Volume Mascara,1905.50,990.86,103,PHR-0029,Cosmetics,18.50,9.62
+2026-02,North,Calming Oat Facial Mask,1797.60,935.18,107,PHR-0030,Cosmetics,16.80,8.74
+2026-02,North,Daily Complete Multivitamin,2339.10,1403.46,138,PHR-0031,Vitamins,16.95,10.17
+2026-02,North,Vitamin D3 2000 IU Softgels,1648.80,989.28,144,PHR-0032,Vitamins,11.45,6.87
+2026-02,North,Vitamin C 1000 mg Tablets,1966.80,1180.08,149,PHR-0033,Vitamins,13.20,7.92
+2026-02,North,Omega-3 Fish Oil Softgels,3061.25,1836.75,155,PHR-0034,Vitamins,19.75,11.85
+2026-02,North,Iron Plus Folic Acid Tablets,2056.00,1233.60,160,PHR-0035,Vitamins,12.85,7.71
+2026-02,North,Calcium Magnesium Zinc Caplets,2589.60,1553.76,166,PHR-0036,Vitamins,15.60,9.36
+2026-02,North,B-Complex Energy Capsules,2436.75,1462.05,171,PHR-0037,Vitamins,14.25,8.55
+2026-02,North,Kids Berry Multivitamin Gummies,3079.80,1847.88,177,PHR-0038,Vitamins,17.40,10.44
+2026-02,North,Biotin 5000 mcg Tablets,1947.40,1168.44,182,PHR-0039,Vitamins,10.70,6.42
+2026-02,North,Prenatal Complete Capsules,4004.40,2402.64,188,PHR-0040,Vitamins,21.30,12.78
+2026-02,South,SolarGuard SPF 50 Face Lotion,1025.46,594.54,54,PHR-0001,Sun Protection,18.99,11.01
+2026-02,South,SunShield SPF 30 Body Spray,811.44,470.40,56,PHR-0002,Sun Protection,14.49,8.40
+2026-02,South,Mineral Defense SPF 40 Cream,1261.50,731.96,58,PHR-0003,Sun Protection,21.75,12.62
+2026-02,South,Kids SunSafe SPF 50 Lotion,975.00,565.80,60,PHR-0004,Sun Protection,16.25,9.43
+2026-02,South,Daily UV Defense SPF 25 Moisturizer,1121.40,650.16,63,PHR-0005,Sun Protection,17.80,10.32
+2026-02,South,SportBlock SPF 50 Gel,1274.00,739.05,65,PHR-0006,Sun Protection,19.60,11.37
+2026-02,South,Clear Face SPF 35 Fluid,1480.70,858.94,67,PHR-0007,Sun Protection,22.10,12.82
+2026-02,South,After Sun Cooling Aloe Gel,824.55,478.17,69,PHR-0008,Sun Protection,11.95,6.93
+2026-02,South,Lip Protect SPF 30 Balm,408.25,237.14,71,PHR-0009,Sun Protection,5.75,3.34
+2026-02,South,UltraLight SPF 45 Mist,1160.70,673.06,73,PHR-0010,Sun Protection,15.90,9.22
+2026-02,South,ColdEase Daytime Capsules,1926.47,1193.64,203,PHR-0011,Cold and Flu,9.49,5.88
+2026-02,South,ColdEase Nighttime Syrup,2162.75,1341.96,211,PHR-0012,Cold and Flu,10.25,6.36
+2026-02,South,BreatheFree Nasal Spray,1916.25,1189.17,219,PHR-0013,Cold and Flu,8.75,5.43
+2026-02,South,ThroatCalm Honey Lozenges,1452.80,901.19,227,PHR-0014,Cold and Flu,6.40,3.97
+2026-02,South,FluRelief Multi-Symptom Tablets,2961.00,1835.35,235,PHR-0015,Cold and Flu,12.60,7.81
+2026-02,South,ChestClear Expectorant Syrup,2745.90,1703.43,243,PHR-0016,Cold and Flu,11.30,7.01
+2026-02,South,SinusComfort Caplets,2497.45,1548.67,251,PHR-0017,Cold and Flu,9.95,6.17
+2026-02,South,Junior Fever and Cold Liquid,2123.80,1315.72,259,PHR-0018,Cold and Flu,8.20,5.08
+2026-02,South,Menthol Comfort Vapor Rub,1909.05,1182.81,267,PHR-0019,Cold and Flu,7.15,4.43
+2026-02,South,Rapid Relief Cough Drops,1333.75,827.75,275,PHR-0020,Cold and Flu,4.85,3.01
+2026-02,South,HydraSilk Daily Face Cream,1739.50,904.54,71,PHR-0021,Cosmetics,24.50,12.74
+2026-02,South,Velvet Matte Foundation - Medium,1989.25,1034.41,73,PHR-0022,Cosmetics,27.25,14.17
+2026-02,South,GentleGlow Facial Cleanser,1045.00,543.40,76,PHR-0023,Cosmetics,13.75,7.15
+2026-02,South,Renewal Retinol Night Serum,2599.10,1351.69,79,PHR-0024,Cosmetics,32.90,17.11
+2026-02,South,Botanical Rose Lip Tint,1016.80,528.90,82,PHR-0025,Cosmetics,12.40,6.45
+2026-02,South,Brightening Vitamin C Serum,2516.00,1308.15,85,PHR-0026,Cosmetics,29.60,15.39
+2026-02,South,SoftTouch Micellar Water,952.65,495.03,87,PHR-0027,Cosmetics,10.95,5.69
+2026-02,South,Nourishing Shea Body Lotion,1377.00,716.40,90,PHR-0028,Cosmetics,15.30,7.96
+2026-02,South,Precision Volume Mascara,1720.50,894.66,93,PHR-0029,Cosmetics,18.50,9.62
+2026-02,South,Calming Oat Facial Mask,1612.80,839.04,96,PHR-0030,Cosmetics,16.80,8.74
+2026-02,South,Daily Complete Multivitamin,2101.80,1261.08,124,PHR-0031,Vitamins,16.95,10.17
+2026-02,South,Vitamin D3 2000 IU Softgels,1477.05,886.23,129,PHR-0032,Vitamins,11.45,6.87
+2026-02,South,Vitamin C 1000 mg Tablets,1768.80,1061.28,134,PHR-0033,Vitamins,13.20,7.92
+2026-02,South,Omega-3 Fish Oil Softgels,2745.25,1647.15,139,PHR-0034,Vitamins,19.75,11.85
+2026-02,South,Iron Plus Folic Acid Tablets,1850.40,1110.24,144,PHR-0035,Vitamins,12.85,7.71
+2026-02,South,Calcium Magnesium Zinc Caplets,2324.40,1394.64,149,PHR-0036,Vitamins,15.60,9.36
+2026-02,South,B-Complex Energy Capsules,2194.50,1316.70,154,PHR-0037,Vitamins,14.25,8.55
+2026-02,South,Kids Berry Multivitamin Gummies,2766.60,1659.96,159,PHR-0038,Vitamins,17.40,10.44
+2026-02,South,Biotin 5000 mcg Tablets,1754.80,1052.88,164,PHR-0039,Vitamins,10.70,6.42
+2026-02,South,Prenatal Complete Capsules,3599.70,2159.82,169,PHR-0040,Vitamins,21.30,12.78
+2026-02,East,SolarGuard SPF 50 Face Lotion,1253.34,726.66,66,PHR-0001,Sun Protection,18.99,11.01
+2026-02,East,SunShield SPF 30 Body Spray,999.81,579.60,69,PHR-0002,Sun Protection,14.49,8.40
+2026-02,East,Mineral Defense SPF 40 Cream,1544.25,896.02,71,PHR-0003,Sun Protection,21.75,12.62
+2026-02,East,Kids SunSafe SPF 50 Lotion,1202.50,697.82,74,PHR-0004,Sun Protection,16.25,9.43
+2026-02,East,Daily UV Defense SPF 25 Moisturizer,1370.60,794.64,77,PHR-0005,Sun Protection,17.80,10.32
+2026-02,East,SportBlock SPF 50 Gel,1548.40,898.23,79,PHR-0006,Sun Protection,19.60,11.37
+2026-02,East,Clear Face SPF 35 Fluid,1812.20,1051.24,82,PHR-0007,Sun Protection,22.10,12.82
+2026-02,East,After Sun Cooling Aloe Gel,1003.80,582.12,84,PHR-0008,Sun Protection,11.95,6.93
+2026-02,East,Lip Protect SPF 30 Balm,500.25,290.58,87,PHR-0009,Sun Protection,5.75,3.34
+2026-02,East,UltraLight SPF 45 Mist,1431.00,829.80,90,PHR-0010,Sun Protection,15.90,9.22
+2026-02,East,ColdEase Daytime Capsules,2353.52,1458.24,248,PHR-0011,Cold and Flu,9.49,5.88
+2026-02,East,ColdEase Nighttime Syrup,2634.25,1634.52,257,PHR-0012,Cold and Flu,10.25,6.36
+2026-02,East,BreatheFree Nasal Spray,2336.25,1449.81,267,PHR-0013,Cold and Flu,8.75,5.43
+2026-02,East,ThroatCalm Honey Lozenges,1772.80,1099.69,277,PHR-0014,Cold and Flu,6.40,3.97
+2026-02,East,FluRelief Multi-Symptom Tablets,3616.20,2241.47,287,PHR-0015,Cold and Flu,12.60,7.81
+2026-02,East,ChestClear Expectorant Syrup,3356.10,2081.97,297,PHR-0016,Cold and Flu,11.30,7.01
+2026-02,East,SinusComfort Caplets,3054.65,1894.19,307,PHR-0017,Cold and Flu,9.95,6.17
+2026-02,East,Junior Fever and Cold Liquid,2599.40,1610.36,317,PHR-0018,Cold and Flu,8.20,5.08
+2026-02,East,Menthol Comfort Vapor Rub,2338.05,1448.61,327,PHR-0019,Cold and Flu,7.15,4.43
+2026-02,East,Rapid Relief Cough Drops,1634.45,1014.37,337,PHR-0020,Cold and Flu,4.85,3.01
+2026-02,East,HydraSilk Daily Face Cream,2107.00,1095.64,86,PHR-0021,Cosmetics,24.50,12.74
+2026-02,East,Velvet Matte Foundation - Medium,2452.50,1275.30,90,PHR-0022,Cosmetics,27.25,14.17
+2026-02,East,GentleGlow Facial Cleanser,1278.75,664.95,93,PHR-0023,Cosmetics,13.75,7.15
+2026-02,East,Renewal Retinol Night Serum,3191.30,1659.67,97,PHR-0024,Cosmetics,32.90,17.11
+2026-02,East,Botanical Rose Lip Tint,1240.00,645.00,100,PHR-0025,Cosmetics,12.40,6.45
+2026-02,East,Brightening Vitamin C Serum,3048.80,1585.17,103,PHR-0026,Cosmetics,29.60,15.39
+2026-02,East,SoftTouch Micellar Water,1171.65,608.83,107,PHR-0027,Cosmetics,10.95,5.69
+2026-02,East,Nourishing Shea Body Lotion,1683.00,875.60,110,PHR-0028,Cosmetics,15.30,7.96
+2026-02,East,Precision Volume Mascara,2109.00,1096.68,114,PHR-0029,Cosmetics,18.50,9.62
+2026-02,East,Calming Oat Facial Mask,1965.60,1022.58,117,PHR-0030,Cosmetics,16.80,8.74
+2026-02,East,Daily Complete Multivitamin,2576.40,1545.84,152,PHR-0031,Vitamins,16.95,10.17
+2026-02,East,Vitamin D3 2000 IU Softgels,1809.10,1085.46,158,PHR-0032,Vitamins,11.45,6.87
+2026-02,East,Vitamin C 1000 mg Tablets,2164.80,1298.88,164,PHR-0033,Vitamins,13.20,7.92
+2026-02,East,Omega-3 Fish Oil Softgels,3357.50,2014.50,170,PHR-0034,Vitamins,19.75,11.85
+2026-02,East,Iron Plus Folic Acid Tablets,2261.60,1356.96,176,PHR-0035,Vitamins,12.85,7.71
+2026-02,East,Calcium Magnesium Zinc Caplets,2839.20,1703.52,182,PHR-0036,Vitamins,15.60,9.36
+2026-02,East,B-Complex Energy Capsules,2679.00,1607.40,188,PHR-0037,Vitamins,14.25,8.55
+2026-02,East,Kids Berry Multivitamin Gummies,3375.60,2025.36,194,PHR-0038,Vitamins,17.40,10.44
+2026-02,East,Biotin 5000 mcg Tablets,2140.00,1284.00,200,PHR-0039,Vitamins,10.70,6.42
+2026-02,East,Prenatal Complete Capsules,4387.80,2632.68,206,PHR-0040,Vitamins,21.30,12.78
+2026-02,West,SolarGuard SPF 50 Face Lotion,1367.28,792.72,72,PHR-0001,Sun Protection,18.99,11.01
+2026-02,West,SunShield SPF 30 Body Spray,1086.75,630.00,75,PHR-0002,Sun Protection,14.49,8.40
+2026-02,West,Mineral Defense SPF 40 Cream,1696.50,984.36,78,PHR-0003,Sun Protection,21.75,12.62
+2026-02,West,Kids SunSafe SPF 50 Lotion,1316.25,763.83,81,PHR-0004,Sun Protection,16.25,9.43
+2026-02,West,Daily UV Defense SPF 25 Moisturizer,1495.20,866.88,84,PHR-0005,Sun Protection,17.80,10.32
+2026-02,West,SportBlock SPF 50 Gel,1685.60,977.82,86,PHR-0006,Sun Protection,19.60,11.37
+2026-02,West,Clear Face SPF 35 Fluid,1966.90,1140.98,89,PHR-0007,Sun Protection,22.10,12.82
+2026-02,West,After Sun Cooling Aloe Gel,1099.40,637.56,92,PHR-0008,Sun Protection,11.95,6.93
+2026-02,West,Lip Protect SPF 30 Balm,546.25,317.30,95,PHR-0009,Sun Protection,5.75,3.34
+2026-02,West,UltraLight SPF 45 Mist,1558.20,903.56,98,PHR-0010,Sun Protection,15.90,9.22
+2026-02,West,ColdEase Daytime Capsules,2562.30,1587.60,270,PHR-0011,Cold and Flu,9.49,5.88
+2026-02,West,ColdEase Nighttime Syrup,2880.25,1787.16,281,PHR-0012,Cold and Flu,10.25,6.36
+2026-02,West,BreatheFree Nasal Spray,2555.00,1585.56,292,PHR-0013,Cold and Flu,8.75,5.43
+2026-02,West,ThroatCalm Honey Lozenges,1932.80,1198.94,302,PHR-0014,Cold and Flu,6.40,3.97
+2026-02,West,FluRelief Multi-Symptom Tablets,3943.80,2444.53,313,PHR-0015,Cold and Flu,12.60,7.81
+2026-02,West,ChestClear Expectorant Syrup,3661.20,2271.24,324,PHR-0016,Cold and Flu,11.30,7.01
+2026-02,West,SinusComfort Caplets,3333.25,2066.95,335,PHR-0017,Cold and Flu,9.95,6.17
+2026-02,West,Junior Fever and Cold Liquid,2837.20,1757.68,346,PHR-0018,Cold and Flu,8.20,5.08
+2026-02,West,Menthol Comfort Vapor Rub,2545.40,1577.08,356,PHR-0019,Cold and Flu,7.15,4.43
+2026-02,West,Rapid Relief Cough Drops,1779.95,1104.67,367,PHR-0020,Cold and Flu,4.85,3.01
+2026-02,West,HydraSilk Daily Face Cream,2303.00,1197.56,94,PHR-0021,Cosmetics,24.50,12.74
+2026-02,West,Velvet Matte Foundation - Medium,2670.50,1388.66,98,PHR-0022,Cosmetics,27.25,14.17
+2026-02,West,GentleGlow Facial Cleanser,1402.50,729.30,102,PHR-0023,Cosmetics,13.75,7.15
+2026-02,West,Renewal Retinol Night Serum,3454.50,1796.55,105,PHR-0024,Cosmetics,32.90,17.11
+2026-02,West,Botanical Rose Lip Tint,1351.60,703.05,109,PHR-0025,Cosmetics,12.40,6.45
+2026-02,West,Brightening Vitamin C Serum,3344.80,1739.07,113,PHR-0026,Cosmetics,29.60,15.39
+2026-02,West,SoftTouch Micellar Water,1281.15,665.73,117,PHR-0027,Cosmetics,10.95,5.69
+2026-02,West,Nourishing Shea Body Lotion,1836.00,955.20,120,PHR-0028,Cosmetics,15.30,7.96
+2026-02,West,Precision Volume Mascara,2294.00,1192.88,124,PHR-0029,Cosmetics,18.50,9.62
+2026-02,West,Calming Oat Facial Mask,2150.40,1118.72,128,PHR-0030,Cosmetics,16.80,8.74
+2026-02,West,Daily Complete Multivitamin,2813.70,1688.22,166,PHR-0031,Vitamins,16.95,10.17
+2026-02,West,Vitamin D3 2000 IU Softgels,1969.40,1181.64,172,PHR-0032,Vitamins,11.45,6.87
+2026-02,West,Vitamin C 1000 mg Tablets,2362.80,1417.68,179,PHR-0033,Vitamins,13.20,7.92
+2026-02,West,Omega-3 Fish Oil Softgels,3653.75,2192.25,185,PHR-0034,Vitamins,19.75,11.85
+2026-02,West,Iron Plus Folic Acid Tablets,2467.20,1480.32,192,PHR-0035,Vitamins,12.85,7.71
+2026-02,West,Calcium Magnesium Zinc Caplets,3104.40,1862.64,199,PHR-0036,Vitamins,15.60,9.36
+2026-02,West,B-Complex Energy Capsules,2921.25,1752.75,205,PHR-0037,Vitamins,14.25,8.55
+2026-02,West,Kids Berry Multivitamin Gummies,3688.80,2213.28,212,PHR-0038,Vitamins,17.40,10.44
+2026-02,West,Biotin 5000 mcg Tablets,2343.30,1405.98,219,PHR-0039,Vitamins,10.70,6.42
+2026-02,West,Prenatal Complete Capsules,4792.50,2875.50,225,PHR-0040,Vitamins,21.30,12.78
+2026-03,North,SolarGuard SPF 50 Face Lotion,1709.10,990.90,90,PHR-0001,Sun Protection,18.99,11.01
+2026-03,North,SunShield SPF 30 Body Spray,1362.06,789.60,94,PHR-0002,Sun Protection,14.49,8.40
+2026-03,North,Mineral Defense SPF 40 Cream,2109.75,1224.14,97,PHR-0003,Sun Protection,21.75,12.62
+2026-03,North,Kids SunSafe SPF 50 Lotion,1641.25,952.43,101,PHR-0004,Sun Protection,16.25,9.43
+2026-03,North,Daily UV Defense SPF 25 Moisturizer,1851.20,1073.28,104,PHR-0005,Sun Protection,17.80,10.32
+2026-03,North,SportBlock SPF 50 Gel,2116.80,1227.96,108,PHR-0006,Sun Protection,19.60,11.37
+2026-03,North,Clear Face SPF 35 Fluid,2475.20,1435.84,112,PHR-0007,Sun Protection,22.10,12.82
+2026-03,North,After Sun Cooling Aloe Gel,1374.25,796.95,115,PHR-0008,Sun Protection,11.95,6.93
+2026-03,North,Lip Protect SPF 30 Balm,684.25,397.46,119,PHR-0009,Sun Protection,5.75,3.34
+2026-03,North,UltraLight SPF 45 Mist,1939.80,1124.84,122,PHR-0010,Sun Protection,15.90,9.22
+2026-03,North,ColdEase Daytime Capsules,1708.20,1058.40,180,PHR-0011,Cold and Flu,9.49,5.88
+2026-03,North,ColdEase Nighttime Syrup,1916.75,1189.32,187,PHR-0012,Cold and Flu,10.25,6.36
+2026-03,North,BreatheFree Nasal Spray,1697.50,1053.42,194,PHR-0013,Cold and Flu,8.75,5.43
+2026-03,North,ThroatCalm Honey Lozenges,1292.80,801.94,202,PHR-0014,Cold and Flu,6.40,3.97
+2026-03,North,FluRelief Multi-Symptom Tablets,2633.40,1632.29,209,PHR-0015,Cold and Flu,12.60,7.81
+2026-03,North,ChestClear Expectorant Syrup,2440.80,1514.16,216,PHR-0016,Cold and Flu,11.30,7.01
+2026-03,North,SinusComfort Caplets,2218.85,1375.91,223,PHR-0017,Cold and Flu,9.95,6.17
+2026-03,North,Junior Fever and Cold Liquid,1886.00,1168.40,230,PHR-0018,Cold and Flu,8.20,5.08
+2026-03,North,Menthol Comfort Vapor Rub,1701.70,1054.34,238,PHR-0019,Cold and Flu,7.15,4.43
+2026-03,North,Rapid Relief Cough Drops,1188.25,737.45,245,PHR-0020,Cold and Flu,4.85,3.01
+2026-03,North,HydraSilk Daily Face Cream,2058.00,1070.16,84,PHR-0021,Cosmetics,24.50,12.74
+2026-03,North,Velvet Matte Foundation - Medium,2370.75,1232.79,87,PHR-0022,Cosmetics,27.25,14.17
+2026-03,North,GentleGlow Facial Cleanser,1251.25,650.65,91,PHR-0023,Cosmetics,13.75,7.15
+2026-03,North,Renewal Retinol Night Serum,3092.60,1608.34,94,PHR-0024,Cosmetics,32.90,17.11
+2026-03,North,Botanical Rose Lip Tint,1202.80,625.65,97,PHR-0025,Cosmetics,12.40,6.45
+2026-03,North,Brightening Vitamin C Serum,2989.60,1554.39,101,PHR-0026,Cosmetics,29.60,15.39
+2026-03,North,SoftTouch Micellar Water,1138.80,591.76,104,PHR-0027,Cosmetics,10.95,5.69
+2026-03,North,Nourishing Shea Body Lotion,1652.40,859.68,108,PHR-0028,Cosmetics,15.30,7.96
+2026-03,North,Precision Volume Mascara,2053.50,1067.82,111,PHR-0029,Cosmetics,18.50,9.62
+2026-03,North,Calming Oat Facial Mask,1915.20,996.36,114,PHR-0030,Cosmetics,16.80,8.74
+2026-03,North,Daily Complete Multivitamin,2237.40,1342.44,132,PHR-0031,Vitamins,16.95,10.17
+2026-03,North,Vitamin D3 2000 IU Softgels,1568.65,941.19,137,PHR-0032,Vitamins,11.45,6.87
+2026-03,North,Vitamin C 1000 mg Tablets,1887.60,1132.56,143,PHR-0033,Vitamins,13.20,7.92
+2026-03,North,Omega-3 Fish Oil Softgels,2923.00,1753.80,148,PHR-0034,Vitamins,19.75,11.85
+2026-03,North,Iron Plus Folic Acid Tablets,1966.05,1179.63,153,PHR-0035,Vitamins,12.85,7.71
+2026-03,North,Calcium Magnesium Zinc Caplets,2464.80,1478.88,158,PHR-0036,Vitamins,15.60,9.36
+2026-03,North,B-Complex Energy Capsules,2337.00,1402.20,164,PHR-0037,Vitamins,14.25,8.55
+2026-03,North,Kids Berry Multivitamin Gummies,2940.60,1764.36,169,PHR-0038,Vitamins,17.40,10.44
+2026-03,North,Biotin 5000 mcg Tablets,1861.80,1117.08,174,PHR-0039,Vitamins,10.70,6.42
+2026-03,North,Prenatal Complete Capsules,3834.00,2300.40,180,PHR-0040,Vitamins,21.30,12.78
+2026-03,South,SolarGuard SPF 50 Face Lotion,1538.19,891.81,81,PHR-0001,Sun Protection,18.99,11.01
+2026-03,South,SunShield SPF 30 Body Spray,1217.16,705.60,84,PHR-0002,Sun Protection,14.49,8.40
+2026-03,South,Mineral Defense SPF 40 Cream,1892.25,1097.94,87,PHR-0003,Sun Protection,21.75,12.62
+2026-03,South,Kids SunSafe SPF 50 Lotion,1478.75,858.13,91,PHR-0004,Sun Protection,16.25,9.43
+2026-03,South,Daily UV Defense SPF 25 Moisturizer,1673.20,970.08,94,PHR-0005,Sun Protection,17.80,10.32
+2026-03,South,SportBlock SPF 50 Gel,1901.20,1102.89,97,PHR-0006,Sun Protection,19.60,11.37
+2026-03,South,Clear Face SPF 35 Fluid,2210.00,1282.00,100,PHR-0007,Sun Protection,22.10,12.82
+2026-03,South,After Sun Cooling Aloe Gel,1242.80,720.72,104,PHR-0008,Sun Protection,11.95,6.93
+2026-03,South,Lip Protect SPF 30 Balm,615.25,357.38,107,PHR-0009,Sun Protection,5.75,3.34
+2026-03,South,UltraLight SPF 45 Mist,1749.00,1014.20,110,PHR-0010,Sun Protection,15.90,9.22
+2026-03,South,ColdEase Daytime Capsules,1537.38,952.56,162,PHR-0011,Cold and Flu,9.49,5.88
+2026-03,South,ColdEase Nighttime Syrup,1722.00,1068.48,168,PHR-0012,Cold and Flu,10.25,6.36
+2026-03,South,BreatheFree Nasal Spray,1531.25,950.25,175,PHR-0013,Cold and Flu,8.75,5.43
+2026-03,South,ThroatCalm Honey Lozenges,1158.40,718.57,181,PHR-0014,Cold and Flu,6.40,3.97
+2026-03,South,FluRelief Multi-Symptom Tablets,2368.80,1468.28,188,PHR-0015,Cold and Flu,12.60,7.81
+2026-03,South,ChestClear Expectorant Syrup,2192.20,1359.94,194,PHR-0016,Cold and Flu,11.30,7.01
+2026-03,South,SinusComfort Caplets,1999.95,1240.17,201,PHR-0017,Cold and Flu,9.95,6.17
+2026-03,South,Junior Fever and Cold Liquid,1697.40,1051.56,207,PHR-0018,Cold and Flu,8.20,5.08
+2026-03,South,Menthol Comfort Vapor Rub,1530.10,948.02,214,PHR-0019,Cold and Flu,7.15,4.43
+2026-03,South,Rapid Relief Cough Drops,1067.00,662.20,220,PHR-0020,Cold and Flu,4.85,3.01
+2026-03,South,HydraSilk Daily Face Cream,1862.00,968.24,76,PHR-0021,Cosmetics,24.50,12.74
+2026-03,South,Velvet Matte Foundation - Medium,2152.75,1119.43,79,PHR-0022,Cosmetics,27.25,14.17
+2026-03,South,GentleGlow Facial Cleanser,1127.50,586.30,82,PHR-0023,Cosmetics,13.75,7.15
+2026-03,South,Renewal Retinol Night Serum,2796.50,1454.35,85,PHR-0024,Cosmetics,32.90,17.11
+2026-03,South,Botanical Rose Lip Tint,1091.20,567.60,88,PHR-0025,Cosmetics,12.40,6.45
+2026-03,South,Brightening Vitamin C Serum,2693.60,1400.49,91,PHR-0026,Cosmetics,29.60,15.39
+2026-03,South,SoftTouch Micellar Water,1029.30,534.86,94,PHR-0027,Cosmetics,10.95,5.69
+2026-03,South,Nourishing Shea Body Lotion,1484.10,772.12,97,PHR-0028,Cosmetics,15.30,7.96
+2026-03,South,Precision Volume Mascara,1850.00,962.00,100,PHR-0029,Cosmetics,18.50,9.62
+2026-03,South,Calming Oat Facial Mask,1730.40,900.22,103,PHR-0030,Cosmetics,16.80,8.74
+2026-03,South,Daily Complete Multivitamin,2017.05,1210.23,119,PHR-0031,Vitamins,16.95,10.17
+2026-03,South,Vitamin D3 2000 IU Softgels,1419.80,851.88,124,PHR-0032,Vitamins,11.45,6.87
+2026-03,South,Vitamin C 1000 mg Tablets,1689.60,1013.76,128,PHR-0033,Vitamins,13.20,7.92
+2026-03,South,Omega-3 Fish Oil Softgels,2626.75,1576.05,133,PHR-0034,Vitamins,19.75,11.85
+2026-03,South,Iron Plus Folic Acid Tablets,1773.30,1063.98,138,PHR-0035,Vitamins,12.85,7.71
+2026-03,South,Calcium Magnesium Zinc Caplets,2230.80,1338.48,143,PHR-0036,Vitamins,15.60,9.36
+2026-03,South,B-Complex Energy Capsules,2094.75,1256.85,147,PHR-0037,Vitamins,14.25,8.55
+2026-03,South,Kids Berry Multivitamin Gummies,2644.80,1586.88,152,PHR-0038,Vitamins,17.40,10.44
+2026-03,South,Biotin 5000 mcg Tablets,1679.90,1007.94,157,PHR-0039,Vitamins,10.70,6.42
+2026-03,South,Prenatal Complete Capsules,3450.60,2070.36,162,PHR-0040,Vitamins,21.30,12.78
+2026-03,East,SolarGuard SPF 50 Face Lotion,1880.01,1089.99,99,PHR-0001,Sun Protection,18.99,11.01
+2026-03,East,SunShield SPF 30 Body Spray,1492.47,865.20,103,PHR-0002,Sun Protection,14.49,8.40
+2026-03,East,Mineral Defense SPF 40 Cream,2327.25,1350.34,107,PHR-0003,Sun Protection,21.75,12.62
+2026-03,East,Kids SunSafe SPF 50 Lotion,1803.75,1046.73,111,PHR-0004,Sun Protection,16.25,9.43
+2026-03,East,Daily UV Defense SPF 25 Moisturizer,2047.00,1186.80,115,PHR-0005,Sun Protection,17.80,10.32
+2026-03,East,SportBlock SPF 50 Gel,2332.40,1353.03,119,PHR-0006,Sun Protection,19.60,11.37
+2026-03,East,Clear Face SPF 35 Fluid,2718.30,1576.86,123,PHR-0007,Sun Protection,22.10,12.82
+2026-03,East,After Sun Cooling Aloe Gel,1517.65,880.11,127,PHR-0008,Sun Protection,11.95,6.93
+2026-03,East,Lip Protect SPF 30 Balm,753.25,437.54,131,PHR-0009,Sun Protection,5.75,3.34
+2026-03,East,UltraLight SPF 45 Mist,2146.50,1244.70,135,PHR-0010,Sun Protection,15.90,9.22
+2026-03,East,ColdEase Daytime Capsules,1879.02,1164.24,198,PHR-0011,Cold and Flu,9.49,5.88
+2026-03,East,ColdEase Nighttime Syrup,2111.50,1310.16,206,PHR-0012,Cold and Flu,10.25,6.36
+2026-03,East,BreatheFree Nasal Spray,1872.50,1162.02,214,PHR-0013,Cold and Flu,8.75,5.43
+2026-03,East,ThroatCalm Honey Lozenges,1420.80,881.34,222,PHR-0014,Cold and Flu,6.40,3.97
+2026-03,East,FluRelief Multi-Symptom Tablets,2898.00,1796.30,230,PHR-0015,Cold and Flu,12.60,7.81
+2026-03,East,ChestClear Expectorant Syrup,2689.40,1668.38,238,PHR-0016,Cold and Flu,11.30,7.01
+2026-03,East,SinusComfort Caplets,2447.70,1517.82,246,PHR-0017,Cold and Flu,9.95,6.17
+2026-03,East,Junior Fever and Cold Liquid,2074.60,1285.24,253,PHR-0018,Cold and Flu,8.20,5.08
+2026-03,East,Menthol Comfort Vapor Rub,1866.15,1156.23,261,PHR-0019,Cold and Flu,7.15,4.43
+2026-03,East,Rapid Relief Cough Drops,1304.65,809.69,269,PHR-0020,Cold and Flu,4.85,3.01
+2026-03,East,HydraSilk Daily Face Cream,2254.00,1172.08,92,PHR-0021,Cosmetics,24.50,12.74
+2026-03,East,Velvet Matte Foundation - Medium,2616.00,1360.32,96,PHR-0022,Cosmetics,27.25,14.17
+2026-03,East,GentleGlow Facial Cleanser,1375.00,715.00,100,PHR-0023,Cosmetics,13.75,7.15
+2026-03,East,Renewal Retinol Night Serum,3388.70,1762.33,103,PHR-0024,Cosmetics,32.90,17.11
+2026-03,East,Botanical Rose Lip Tint,1326.80,690.15,107,PHR-0025,Cosmetics,12.40,6.45
+2026-03,East,Brightening Vitamin C Serum,3285.60,1708.29,111,PHR-0026,Cosmetics,29.60,15.39
+2026-03,East,SoftTouch Micellar Water,1259.25,654.35,115,PHR-0027,Cosmetics,10.95,5.69
+2026-03,East,Nourishing Shea Body Lotion,1805.40,939.28,118,PHR-0028,Cosmetics,15.30,7.96
+2026-03,East,Precision Volume Mascara,2257.00,1173.64,122,PHR-0029,Cosmetics,18.50,9.62
+2026-03,East,Calming Oat Facial Mask,2116.80,1101.24,126,PHR-0030,Cosmetics,16.80,8.74
+2026-03,East,Daily Complete Multivitamin,2457.75,1474.65,145,PHR-0031,Vitamins,16.95,10.17
+2026-03,East,Vitamin D3 2000 IU Softgels,1728.95,1037.37,151,PHR-0032,Vitamins,11.45,6.87
+2026-03,East,Vitamin C 1000 mg Tablets,2072.40,1243.44,157,PHR-0033,Vitamins,13.20,7.92
+2026-03,East,Omega-3 Fish Oil Softgels,3219.25,1931.55,163,PHR-0034,Vitamins,19.75,11.85
+2026-03,East,Iron Plus Folic Acid Tablets,2158.80,1295.28,168,PHR-0035,Vitamins,12.85,7.71
+2026-03,East,Calcium Magnesium Zinc Caplets,2714.40,1628.64,174,PHR-0036,Vitamins,15.60,9.36
+2026-03,East,B-Complex Energy Capsules,2565.00,1539.00,180,PHR-0037,Vitamins,14.25,8.55
+2026-03,East,Kids Berry Multivitamin Gummies,3236.40,1941.84,186,PHR-0038,Vitamins,17.40,10.44
+2026-03,East,Biotin 5000 mcg Tablets,2054.40,1232.64,192,PHR-0039,Vitamins,10.70,6.42
+2026-03,East,Prenatal Complete Capsules,4196.10,2517.66,197,PHR-0040,Vitamins,21.30,12.78
+2026-03,West,SolarGuard SPF 50 Face Lotion,2050.92,1189.08,108,PHR-0001,Sun Protection,18.99,11.01
+2026-03,West,SunShield SPF 30 Body Spray,1622.88,940.80,112,PHR-0002,Sun Protection,14.49,8.40
+2026-03,West,Mineral Defense SPF 40 Cream,2544.75,1476.54,117,PHR-0003,Sun Protection,21.75,12.62
+2026-03,West,Kids SunSafe SPF 50 Lotion,1966.25,1141.03,121,PHR-0004,Sun Protection,16.25,9.43
+2026-03,West,Daily UV Defense SPF 25 Moisturizer,2225.00,1290.00,125,PHR-0005,Sun Protection,17.80,10.32
+2026-03,West,SportBlock SPF 50 Gel,2548.00,1478.10,130,PHR-0006,Sun Protection,19.60,11.37
+2026-03,West,Clear Face SPF 35 Fluid,2961.40,1717.88,134,PHR-0007,Sun Protection,22.10,12.82
+2026-03,West,After Sun Cooling Aloe Gel,1649.10,956.34,138,PHR-0008,Sun Protection,11.95,6.93
+2026-03,West,Lip Protect SPF 30 Balm,822.25,477.62,143,PHR-0009,Sun Protection,5.75,3.34
+2026-03,West,UltraLight SPF 45 Mist,2337.30,1355.34,147,PHR-0010,Sun Protection,15.90,9.22
+2026-03,West,ColdEase Daytime Capsules,2049.84,1270.08,216,PHR-0011,Cold and Flu,9.49,5.88
+2026-03,West,ColdEase Nighttime Syrup,2306.25,1431.00,225,PHR-0012,Cold and Flu,10.25,6.36
+2026-03,West,BreatheFree Nasal Spray,2038.75,1265.19,233,PHR-0013,Cold and Flu,8.75,5.43
+2026-03,West,ThroatCalm Honey Lozenges,1548.80,960.74,242,PHR-0014,Cold and Flu,6.40,3.97
+2026-03,West,FluRelief Multi-Symptom Tablets,3162.60,1960.31,251,PHR-0015,Cold and Flu,12.60,7.81
+2026-03,West,ChestClear Expectorant Syrup,2926.70,1815.59,259,PHR-0016,Cold and Flu,11.30,7.01
+2026-03,West,SinusComfort Caplets,2666.60,1653.56,268,PHR-0017,Cold and Flu,9.95,6.17
+2026-03,West,Junior Fever and Cold Liquid,2263.20,1402.08,276,PHR-0018,Cold and Flu,8.20,5.08
+2026-03,West,Menthol Comfort Vapor Rub,2037.75,1262.55,285,PHR-0019,Cold and Flu,7.15,4.43
+2026-03,West,Rapid Relief Cough Drops,1425.90,884.94,294,PHR-0020,Cold and Flu,4.85,3.01
+2026-03,West,HydraSilk Daily Face Cream,2474.50,1286.74,101,PHR-0021,Cosmetics,24.50,12.74
+2026-03,West,Velvet Matte Foundation - Medium,2861.25,1487.85,105,PHR-0022,Cosmetics,27.25,14.17
+2026-03,West,GentleGlow Facial Cleanser,1498.75,779.35,109,PHR-0023,Cosmetics,13.75,7.15
+2026-03,West,Renewal Retinol Night Serum,3717.70,1933.43,113,PHR-0024,Cosmetics,32.90,17.11
+2026-03,West,Botanical Rose Lip Tint,1450.80,754.65,117,PHR-0025,Cosmetics,12.40,6.45
+2026-03,West,Brightening Vitamin C Serum,3581.60,1862.19,121,PHR-0026,Cosmetics,29.60,15.39
+2026-03,West,SoftTouch Micellar Water,1368.75,711.25,125,PHR-0027,Cosmetics,10.95,5.69
+2026-03,West,Nourishing Shea Body Lotion,1973.70,1026.84,129,PHR-0028,Cosmetics,15.30,7.96
+2026-03,West,Precision Volume Mascara,2460.50,1279.46,133,PHR-0029,Cosmetics,18.50,9.62
+2026-03,West,Calming Oat Facial Mask,2301.60,1197.38,137,PHR-0030,Cosmetics,16.80,8.74
+2026-03,West,Daily Complete Multivitamin,2678.10,1606.86,158,PHR-0031,Vitamins,16.95,10.17
+2026-03,West,Vitamin D3 2000 IU Softgels,1889.25,1133.55,165,PHR-0032,Vitamins,11.45,6.87
+2026-03,West,Vitamin C 1000 mg Tablets,2257.20,1354.32,171,PHR-0033,Vitamins,13.20,7.92
+2026-03,West,Omega-3 Fish Oil Softgels,3495.75,2097.45,177,PHR-0034,Vitamins,19.75,11.85
+2026-03,West,Iron Plus Folic Acid Tablets,2364.40,1418.64,184,PHR-0035,Vitamins,12.85,7.71
+2026-03,West,Calcium Magnesium Zinc Caplets,2964.00,1778.40,190,PHR-0036,Vitamins,15.60,9.36
+2026-03,West,B-Complex Energy Capsules,2793.00,1675.80,196,PHR-0037,Vitamins,14.25,8.55
+2026-03,West,Kids Berry Multivitamin Gummies,3532.20,2119.32,203,PHR-0038,Vitamins,17.40,10.44
+2026-03,West,Biotin 5000 mcg Tablets,2236.30,1341.78,209,PHR-0039,Vitamins,10.70,6.42
+2026-03,West,Prenatal Complete Capsules,4579.50,2747.70,215,PHR-0040,Vitamins,21.30,12.78
+2026-04,North,SolarGuard SPF 50 Face Lotion,2278.80,1321.20,120,PHR-0001,Sun Protection,18.99,11.01
+2026-04,North,SunShield SPF 30 Body Spray,1811.25,1050.00,125,PHR-0002,Sun Protection,14.49,8.40
+2026-04,North,Mineral Defense SPF 40 Cream,2827.50,1640.60,130,PHR-0003,Sun Protection,21.75,12.62
+2026-04,North,Kids SunSafe SPF 50 Lotion,2177.50,1263.62,134,PHR-0004,Sun Protection,16.25,9.43
+2026-04,North,Daily UV Defense SPF 25 Moisturizer,2474.20,1434.48,139,PHR-0005,Sun Protection,17.80,10.32
+2026-04,North,SportBlock SPF 50 Gel,2822.40,1637.28,144,PHR-0006,Sun Protection,19.60,11.37
+2026-04,North,Clear Face SPF 35 Fluid,3292.90,1910.18,149,PHR-0007,Sun Protection,22.10,12.82
+2026-04,North,After Sun Cooling Aloe Gel,1840.30,1067.22,154,PHR-0008,Sun Protection,11.95,6.93
+2026-04,North,Lip Protect SPF 30 Balm,908.50,527.72,158,PHR-0009,Sun Protection,5.75,3.34
+2026-04,North,UltraLight SPF 45 Mist,2591.70,1502.86,163,PHR-0010,Sun Protection,15.90,9.22
+2026-04,North,ColdEase Daytime Capsules,1281.15,793.80,135,PHR-0011,Cold and Flu,9.49,5.88
+2026-04,North,ColdEase Nighttime Syrup,1435.00,890.40,140,PHR-0012,Cold and Flu,10.25,6.36
+2026-04,North,BreatheFree Nasal Spray,1277.50,792.78,146,PHR-0013,Cold and Flu,8.75,5.43
+2026-04,North,ThroatCalm Honey Lozenges,966.40,599.47,151,PHR-0014,Cold and Flu,6.40,3.97
+2026-04,North,FluRelief Multi-Symptom Tablets,1978.20,1226.17,157,PHR-0015,Cold and Flu,12.60,7.81
+2026-04,North,ChestClear Expectorant Syrup,1830.60,1135.62,162,PHR-0016,Cold and Flu,11.30,7.01
+2026-04,North,SinusComfort Caplets,1661.65,1030.39,167,PHR-0017,Cold and Flu,9.95,6.17
+2026-04,North,Junior Fever and Cold Liquid,1418.60,878.84,173,PHR-0018,Cold and Flu,8.20,5.08
+2026-04,North,Menthol Comfort Vapor Rub,1272.70,788.54,178,PHR-0019,Cold and Flu,7.15,4.43
+2026-04,North,Rapid Relief Cough Drops,892.40,553.84,184,PHR-0020,Cold and Flu,4.85,3.01
+2026-04,North,HydraSilk Daily Face Cream,2156.00,1121.12,88,PHR-0021,Cosmetics,24.50,12.74
+2026-04,North,Velvet Matte Foundation - Medium,2507.00,1303.64,92,PHR-0022,Cosmetics,27.25,14.17
+2026-04,North,GentleGlow Facial Cleanser,1306.25,679.25,95,PHR-0023,Cosmetics,13.75,7.15
+2026-04,North,Renewal Retinol Night Serum,3257.10,1693.89,99,PHR-0024,Cosmetics,32.90,17.11
+2026-04,North,Botanical Rose Lip Tint,1264.80,657.90,102,PHR-0025,Cosmetics,12.40,6.45
+2026-04,North,Brightening Vitamin C Serum,3137.60,1631.34,106,PHR-0026,Cosmetics,29.60,15.39
+2026-04,North,SoftTouch Micellar Water,1193.55,620.21,109,PHR-0027,Cosmetics,10.95,5.69
+2026-04,North,Nourishing Shea Body Lotion,1728.90,899.48,113,PHR-0028,Cosmetics,15.30,7.96
+2026-04,North,Precision Volume Mascara,2146.00,1115.92,116,PHR-0029,Cosmetics,18.50,9.62
+2026-04,North,Calming Oat Facial Mask,2016.00,1048.80,120,PHR-0030,Cosmetics,16.80,8.74
+2026-04,North,Daily Complete Multivitamin,2135.70,1281.42,126,PHR-0031,Vitamins,16.95,10.17
+2026-04,North,Vitamin D3 2000 IU Softgels,1499.95,899.97,131,PHR-0032,Vitamins,11.45,6.87
+2026-04,North,Vitamin C 1000 mg Tablets,1795.20,1077.12,136,PHR-0033,Vitamins,13.20,7.92
+2026-04,North,Omega-3 Fish Oil Softgels,2784.75,1670.85,141,PHR-0034,Vitamins,19.75,11.85
+2026-04,North,Iron Plus Folic Acid Tablets,1876.10,1125.66,146,PHR-0035,Vitamins,12.85,7.71
+2026-04,North,Calcium Magnesium Zinc Caplets,2355.60,1413.36,151,PHR-0036,Vitamins,15.60,9.36
+2026-04,North,B-Complex Energy Capsules,2223.00,1333.80,156,PHR-0037,Vitamins,14.25,8.55
+2026-04,North,Kids Berry Multivitamin Gummies,2801.40,1680.84,161,PHR-0038,Vitamins,17.40,10.44
+2026-04,North,Biotin 5000 mcg Tablets,1776.20,1065.72,166,PHR-0039,Vitamins,10.70,6.42
+2026-04,North,Prenatal Complete Capsules,3642.30,2185.38,171,PHR-0040,Vitamins,21.30,12.78
+2026-04,South,SolarGuard SPF 50 Face Lotion,2050.92,1189.08,108,PHR-0001,Sun Protection,18.99,11.01
+2026-04,South,SunShield SPF 30 Body Spray,1622.88,940.80,112,PHR-0002,Sun Protection,14.49,8.40
+2026-04,South,Mineral Defense SPF 40 Cream,2544.75,1476.54,117,PHR-0003,Sun Protection,21.75,12.62
+2026-04,South,Kids SunSafe SPF 50 Lotion,1966.25,1141.03,121,PHR-0004,Sun Protection,16.25,9.43
+2026-04,South,Daily UV Defense SPF 25 Moisturizer,2225.00,1290.00,125,PHR-0005,Sun Protection,17.80,10.32
+2026-04,South,SportBlock SPF 50 Gel,2548.00,1478.10,130,PHR-0006,Sun Protection,19.60,11.37
+2026-04,South,Clear Face SPF 35 Fluid,2961.40,1717.88,134,PHR-0007,Sun Protection,22.10,12.82
+2026-04,South,After Sun Cooling Aloe Gel,1649.10,956.34,138,PHR-0008,Sun Protection,11.95,6.93
+2026-04,South,Lip Protect SPF 30 Balm,822.25,477.62,143,PHR-0009,Sun Protection,5.75,3.34
+2026-04,South,UltraLight SPF 45 Mist,2337.30,1355.34,147,PHR-0010,Sun Protection,15.90,9.22
+2026-04,South,ColdEase Daytime Capsules,1157.78,717.36,122,PHR-0011,Cold and Flu,9.49,5.88
+2026-04,South,ColdEase Nighttime Syrup,1291.50,801.36,126,PHR-0012,Cold and Flu,10.25,6.36
+2026-04,South,BreatheFree Nasal Spray,1146.25,711.33,131,PHR-0013,Cold and Flu,8.75,5.43
+2026-04,South,ThroatCalm Honey Lozenges,870.40,539.92,136,PHR-0014,Cold and Flu,6.40,3.97
+2026-04,South,FluRelief Multi-Symptom Tablets,1776.60,1101.21,141,PHR-0015,Cold and Flu,12.60,7.81
+2026-04,South,ChestClear Expectorant Syrup,1649.80,1023.46,146,PHR-0016,Cold and Flu,11.30,7.01
+2026-04,South,SinusComfort Caplets,1502.45,931.67,151,PHR-0017,Cold and Flu,9.95,6.17
+2026-04,South,Junior Fever and Cold Liquid,1279.20,792.48,156,PHR-0018,Cold and Flu,8.20,5.08
+2026-04,South,Menthol Comfort Vapor Rub,1144.00,708.80,160,PHR-0019,Cold and Flu,7.15,4.43
+2026-04,South,Rapid Relief Cough Drops,800.25,496.65,165,PHR-0020,Cold and Flu,4.85,3.01
+2026-04,South,HydraSilk Daily Face Cream,1935.50,1006.46,79,PHR-0021,Cosmetics,24.50,12.74
+2026-04,South,Velvet Matte Foundation - Medium,2234.50,1161.94,82,PHR-0022,Cosmetics,27.25,14.17
+2026-04,South,GentleGlow Facial Cleanser,1182.50,614.90,86,PHR-0023,Cosmetics,13.75,7.15
+2026-04,South,Renewal Retinol Night Serum,2928.10,1522.79,89,PHR-0024,Cosmetics,32.90,17.11
+2026-04,South,Botanical Rose Lip Tint,1140.80,593.40,92,PHR-0025,Cosmetics,12.40,6.45
+2026-04,South,Brightening Vitamin C Serum,2812.00,1462.05,95,PHR-0026,Cosmetics,29.60,15.39
+2026-04,South,SoftTouch Micellar Water,1073.10,557.62,98,PHR-0027,Cosmetics,10.95,5.69
+2026-04,South,Nourishing Shea Body Lotion,1545.30,803.96,101,PHR-0028,Cosmetics,15.30,7.96
+2026-04,South,Precision Volume Mascara,1942.50,1010.10,105,PHR-0029,Cosmetics,18.50,9.62
+2026-04,South,Calming Oat Facial Mask,1814.40,943.92,108,PHR-0030,Cosmetics,16.80,8.74
+2026-04,South,Daily Complete Multivitamin,1915.35,1149.21,113,PHR-0031,Vitamins,16.95,10.17
+2026-04,South,Vitamin D3 2000 IU Softgels,1351.10,810.66,118,PHR-0032,Vitamins,11.45,6.87
+2026-04,South,Vitamin C 1000 mg Tablets,1610.40,966.24,122,PHR-0033,Vitamins,13.20,7.92
+2026-04,South,Omega-3 Fish Oil Softgels,2508.25,1504.95,127,PHR-0034,Vitamins,19.75,11.85
+2026-04,South,Iron Plus Folic Acid Tablets,1696.20,1017.72,132,PHR-0035,Vitamins,12.85,7.71
+2026-04,South,Calcium Magnesium Zinc Caplets,2121.60,1272.96,136,PHR-0036,Vitamins,15.60,9.36
+2026-04,South,B-Complex Energy Capsules,2009.25,1205.55,141,PHR-0037,Vitamins,14.25,8.55
+2026-04,South,Kids Berry Multivitamin Gummies,2523.00,1513.80,145,PHR-0038,Vitamins,17.40,10.44
+2026-04,South,Biotin 5000 mcg Tablets,1605.00,963.00,150,PHR-0039,Vitamins,10.70,6.42
+2026-04,South,Prenatal Complete Capsules,3280.20,1968.12,154,PHR-0040,Vitamins,21.30,12.78
+2026-04,East,SolarGuard SPF 50 Face Lotion,2506.68,1453.32,132,PHR-0001,Sun Protection,18.99,11.01
+2026-04,East,SunShield SPF 30 Body Spray,1985.13,1150.80,137,PHR-0002,Sun Protection,14.49,8.40
+2026-04,East,Mineral Defense SPF 40 Cream,3110.25,1804.66,143,PHR-0003,Sun Protection,21.75,12.62
+2026-04,East,Kids SunSafe SPF 50 Lotion,2405.00,1395.64,148,PHR-0004,Sun Protection,16.25,9.43
+2026-04,East,Daily UV Defense SPF 25 Moisturizer,2723.40,1578.96,153,PHR-0005,Sun Protection,17.80,10.32
+2026-04,East,SportBlock SPF 50 Gel,3096.80,1796.46,158,PHR-0006,Sun Protection,19.60,11.37
+2026-04,East,Clear Face SPF 35 Fluid,3624.40,2102.48,164,PHR-0007,Sun Protection,22.10,12.82
+2026-04,East,After Sun Cooling Aloe Gel,2019.55,1171.17,169,PHR-0008,Sun Protection,11.95,6.93
+2026-04,East,Lip Protect SPF 30 Balm,1000.50,581.16,174,PHR-0009,Sun Protection,5.75,3.34
+2026-04,East,UltraLight SPF 45 Mist,2862.00,1659.60,180,PHR-0010,Sun Protection,15.90,9.22
+2026-04,East,ColdEase Daytime Capsules,1414.01,876.12,149,PHR-0011,Cold and Flu,9.49,5.88
+2026-04,East,ColdEase Nighttime Syrup,1578.50,979.44,154,PHR-0012,Cold and Flu,10.25,6.36
+2026-04,East,BreatheFree Nasal Spray,1400.00,868.80,160,PHR-0013,Cold and Flu,8.75,5.43
+2026-04,East,ThroatCalm Honey Lozenges,1062.40,659.02,166,PHR-0014,Cold and Flu,6.40,3.97
+2026-04,East,FluRelief Multi-Symptom Tablets,2167.20,1343.32,172,PHR-0015,Cold and Flu,12.60,7.81
+2026-04,East,ChestClear Expectorant Syrup,2011.40,1247.78,178,PHR-0016,Cold and Flu,11.30,7.01
+2026-04,East,SinusComfort Caplets,1830.80,1135.28,184,PHR-0017,Cold and Flu,9.95,6.17
+2026-04,East,Junior Fever and Cold Liquid,1558.00,965.20,190,PHR-0018,Cold and Flu,8.20,5.08
+2026-04,East,Menthol Comfort Vapor Rub,1401.40,868.28,196,PHR-0019,Cold and Flu,7.15,4.43
+2026-04,East,Rapid Relief Cough Drops,979.70,608.02,202,PHR-0020,Cold and Flu,4.85,3.01
+2026-04,East,HydraSilk Daily Face Cream,2376.50,1235.78,97,PHR-0021,Cosmetics,24.50,12.74
+2026-04,East,Velvet Matte Foundation - Medium,2752.25,1431.17,101,PHR-0022,Cosmetics,27.25,14.17
+2026-04,East,GentleGlow Facial Cleanser,1443.75,750.75,105,PHR-0023,Cosmetics,13.75,7.15
+2026-04,East,Renewal Retinol Night Serum,3553.20,1847.88,108,PHR-0024,Cosmetics,32.90,17.11
+2026-04,East,Botanical Rose Lip Tint,1388.80,722.40,112,PHR-0025,Cosmetics,12.40,6.45
+2026-04,East,Brightening Vitamin C Serum,3433.60,1785.24,116,PHR-0026,Cosmetics,29.60,15.39
+2026-04,East,SoftTouch Micellar Water,1314.00,682.80,120,PHR-0027,Cosmetics,10.95,5.69
+2026-04,East,Nourishing Shea Body Lotion,1897.20,987.04,124,PHR-0028,Cosmetics,15.30,7.96
+2026-04,East,Precision Volume Mascara,2368.00,1231.36,128,PHR-0029,Cosmetics,18.50,9.62
+2026-04,East,Calming Oat Facial Mask,2217.60,1153.68,132,PHR-0030,Cosmetics,16.80,8.74
+2026-04,East,Daily Complete Multivitamin,2356.05,1413.63,139,PHR-0031,Vitamins,16.95,10.17
+2026-04,East,Vitamin D3 2000 IU Softgels,1648.80,989.28,144,PHR-0032,Vitamins,11.45,6.87
+2026-04,East,Vitamin C 1000 mg Tablets,1980.00,1188.00,150,PHR-0033,Vitamins,13.20,7.92
+2026-04,East,Omega-3 Fish Oil Softgels,3061.25,1836.75,155,PHR-0034,Vitamins,19.75,11.85
+2026-04,East,Iron Plus Folic Acid Tablets,2068.85,1241.31,161,PHR-0035,Vitamins,12.85,7.71
+2026-04,East,Calcium Magnesium Zinc Caplets,2589.60,1553.76,166,PHR-0036,Vitamins,15.60,9.36
+2026-04,East,B-Complex Energy Capsules,2451.00,1470.60,172,PHR-0037,Vitamins,14.25,8.55
+2026-04,East,Kids Berry Multivitamin Gummies,3079.80,1847.88,177,PHR-0038,Vitamins,17.40,10.44
+2026-04,East,Biotin 5000 mcg Tablets,1958.10,1174.86,183,PHR-0039,Vitamins,10.70,6.42
+2026-04,East,Prenatal Complete Capsules,4004.40,2402.64,188,PHR-0040,Vitamins,21.30,12.78
+2026-04,West,SolarGuard SPF 50 Face Lotion,2734.56,1585.44,144,PHR-0001,Sun Protection,18.99,11.01
+2026-04,West,SunShield SPF 30 Body Spray,2173.50,1260.00,150,PHR-0002,Sun Protection,14.49,8.40
+2026-04,West,Mineral Defense SPF 40 Cream,3393.00,1968.72,156,PHR-0003,Sun Protection,21.75,12.62
+2026-04,West,Kids SunSafe SPF 50 Lotion,2616.25,1518.23,161,PHR-0004,Sun Protection,16.25,9.43
+2026-04,West,Daily UV Defense SPF 25 Moisturizer,2972.60,1723.44,167,PHR-0005,Sun Protection,17.80,10.32
+2026-04,West,SportBlock SPF 50 Gel,3390.80,1967.01,173,PHR-0006,Sun Protection,19.60,11.37
+2026-04,West,Clear Face SPF 35 Fluid,3955.90,2294.78,179,PHR-0007,Sun Protection,22.10,12.82
+2026-04,West,After Sun Cooling Aloe Gel,2198.80,1275.12,184,PHR-0008,Sun Protection,11.95,6.93
+2026-04,West,Lip Protect SPF 30 Balm,1092.50,634.60,190,PHR-0009,Sun Protection,5.75,3.34
+2026-04,West,UltraLight SPF 45 Mist,3116.40,1807.12,196,PHR-0010,Sun Protection,15.90,9.22
+2026-04,West,ColdEase Daytime Capsules,1537.38,952.56,162,PHR-0011,Cold and Flu,9.49,5.88
+2026-04,West,ColdEase Nighttime Syrup,1722.00,1068.48,168,PHR-0012,Cold and Flu,10.25,6.36
+2026-04,West,BreatheFree Nasal Spray,1531.25,950.25,175,PHR-0013,Cold and Flu,8.75,5.43
+2026-04,West,ThroatCalm Honey Lozenges,1158.40,718.57,181,PHR-0014,Cold and Flu,6.40,3.97
+2026-04,West,FluRelief Multi-Symptom Tablets,2368.80,1468.28,188,PHR-0015,Cold and Flu,12.60,7.81
+2026-04,West,ChestClear Expectorant Syrup,2192.20,1359.94,194,PHR-0016,Cold and Flu,11.30,7.01
+2026-04,West,SinusComfort Caplets,1999.95,1240.17,201,PHR-0017,Cold and Flu,9.95,6.17
+2026-04,West,Junior Fever and Cold Liquid,1697.40,1051.56,207,PHR-0018,Cold and Flu,8.20,5.08
+2026-04,West,Menthol Comfort Vapor Rub,1530.10,948.02,214,PHR-0019,Cold and Flu,7.15,4.43
+2026-04,West,Rapid Relief Cough Drops,1067.00,662.20,220,PHR-0020,Cold and Flu,4.85,3.01
+2026-04,West,HydraSilk Daily Face Cream,2597.00,1350.44,106,PHR-0021,Cosmetics,24.50,12.74
+2026-04,West,Velvet Matte Foundation - Medium,2997.50,1558.70,110,PHR-0022,Cosmetics,27.25,14.17
+2026-04,West,GentleGlow Facial Cleanser,1567.50,815.10,114,PHR-0023,Cosmetics,13.75,7.15
+2026-04,West,Renewal Retinol Night Serum,3882.20,2018.98,118,PHR-0024,Cosmetics,32.90,17.11
+2026-04,West,Botanical Rose Lip Tint,1512.80,786.90,122,PHR-0025,Cosmetics,12.40,6.45
+2026-04,West,Brightening Vitamin C Serum,3759.20,1954.53,127,PHR-0026,Cosmetics,29.60,15.39
+2026-04,West,SoftTouch Micellar Water,1434.45,745.39,131,PHR-0027,Cosmetics,10.95,5.69
+2026-04,West,Nourishing Shea Body Lotion,2065.50,1074.60,135,PHR-0028,Cosmetics,15.30,7.96
+2026-04,West,Precision Volume Mascara,2571.50,1337.18,139,PHR-0029,Cosmetics,18.50,9.62
+2026-04,West,Calming Oat Facial Mask,2419.20,1258.56,144,PHR-0030,Cosmetics,16.80,8.74
+2026-04,West,Daily Complete Multivitamin,2559.45,1535.67,151,PHR-0031,Vitamins,16.95,10.17
+2026-04,West,Vitamin D3 2000 IU Softgels,1797.65,1078.59,157,PHR-0032,Vitamins,11.45,6.87
+2026-04,West,Vitamin C 1000 mg Tablets,2151.60,1290.96,163,PHR-0033,Vitamins,13.20,7.92
+2026-04,West,Omega-3 Fish Oil Softgels,3337.75,2002.65,169,PHR-0034,Vitamins,19.75,11.85
+2026-04,West,Iron Plus Folic Acid Tablets,2248.75,1349.25,175,PHR-0035,Vitamins,12.85,7.71
+2026-04,West,Calcium Magnesium Zinc Caplets,2823.60,1694.16,181,PHR-0036,Vitamins,15.60,9.36
+2026-04,West,B-Complex Energy Capsules,2664.75,1598.85,187,PHR-0037,Vitamins,14.25,8.55
+2026-04,West,Kids Berry Multivitamin Gummies,3375.60,2025.36,194,PHR-0038,Vitamins,17.40,10.44
+2026-04,West,Biotin 5000 mcg Tablets,2140.00,1284.00,200,PHR-0039,Vitamins,10.70,6.42
+2026-04,West,Prenatal Complete Capsules,4387.80,2632.68,206,PHR-0040,Vitamins,21.30,12.78
+2026-05,North,SolarGuard SPF 50 Face Lotion,3038.40,1761.60,160,PHR-0001,Sun Protection,18.99,11.01
+2026-05,North,SunShield SPF 30 Body Spray,2405.34,1394.40,166,PHR-0002,Sun Protection,14.49,8.40
+2026-05,North,Mineral Defense SPF 40 Cream,3762.75,2183.26,173,PHR-0003,Sun Protection,21.75,12.62
+2026-05,North,Kids SunSafe SPF 50 Lotion,2908.75,1687.97,179,PHR-0004,Sun Protection,16.25,9.43
+2026-05,North,Daily UV Defense SPF 25 Moisturizer,3310.80,1919.52,186,PHR-0005,Sun Protection,17.80,10.32
+2026-05,North,SportBlock SPF 50 Gel,3763.20,2183.04,192,PHR-0006,Sun Protection,19.60,11.37
+2026-05,North,Clear Face SPF 35 Fluid,4375.80,2538.36,198,PHR-0007,Sun Protection,22.10,12.82
+2026-05,North,After Sun Cooling Aloe Gel,2449.75,1420.65,205,PHR-0008,Sun Protection,11.95,6.93
+2026-05,North,Lip Protect SPF 30 Balm,1213.25,704.74,211,PHR-0009,Sun Protection,5.75,3.34
+2026-05,North,UltraLight SPF 45 Mist,3466.20,2009.96,218,PHR-0010,Sun Protection,15.90,9.22
+2026-05,North,ColdEase Daytime Capsules,996.45,617.40,105,PHR-0011,Cold and Flu,9.49,5.88
+2026-05,North,ColdEase Nighttime Syrup,1117.25,693.24,109,PHR-0012,Cold and Flu,10.25,6.36
+2026-05,North,BreatheFree Nasal Spray,988.75,613.59,113,PHR-0013,Cold and Flu,8.75,5.43
+2026-05,North,ThroatCalm Honey Lozenges,755.20,468.46,118,PHR-0014,Cold and Flu,6.40,3.97
+2026-05,North,FluRelief Multi-Symptom Tablets,1537.20,952.82,122,PHR-0015,Cold and Flu,12.60,7.81
+2026-05,North,ChestClear Expectorant Syrup,1423.80,883.26,126,PHR-0016,Cold and Flu,11.30,7.01
+2026-05,North,SinusComfort Caplets,1293.50,802.10,130,PHR-0017,Cold and Flu,9.95,6.17
+2026-05,North,Junior Fever and Cold Liquid,1098.80,680.72,134,PHR-0018,Cold and Flu,8.20,5.08
+2026-05,North,Menthol Comfort Vapor Rub,993.85,615.77,139,PHR-0019,Cold and Flu,7.15,4.43
+2026-05,North,Rapid Relief Cough Drops,693.55,430.43,143,PHR-0020,Cold and Flu,4.85,3.01
+2026-05,North,HydraSilk Daily Face Cream,2278.50,1184.82,93,PHR-0021,Cosmetics,24.50,12.74
+2026-05,North,Velvet Matte Foundation - Medium,2643.25,1374.49,97,PHR-0022,Cosmetics,27.25,14.17
+2026-05,North,GentleGlow Facial Cleanser,1375.00,715.00,100,PHR-0023,Cosmetics,13.75,7.15
+2026-05,North,Renewal Retinol Night Serum,3421.60,1779.44,104,PHR-0024,Cosmetics,32.90,17.11
+2026-05,North,Botanical Rose Lip Tint,1339.20,696.60,108,PHR-0025,Cosmetics,12.40,6.45
+2026-05,North,Brightening Vitamin C Serum,3285.60,1708.29,111,PHR-0026,Cosmetics,29.60,15.39
+2026-05,North,SoftTouch Micellar Water,1259.25,654.35,115,PHR-0027,Cosmetics,10.95,5.69
+2026-05,North,Nourishing Shea Body Lotion,1820.70,947.24,119,PHR-0028,Cosmetics,15.30,7.96
+2026-05,North,Precision Volume Mascara,2257.00,1173.64,122,PHR-0029,Cosmetics,18.50,9.62
+2026-05,North,Calming Oat Facial Mask,2116.80,1101.24,126,PHR-0030,Cosmetics,16.80,8.74
+2026-05,North,Daily Complete Multivitamin,2034.00,1220.40,120,PHR-0031,Vitamins,16.95,10.17
+2026-05,North,Vitamin D3 2000 IU Softgels,1431.25,858.75,125,PHR-0032,Vitamins,11.45,6.87
+2026-05,North,Vitamin C 1000 mg Tablets,1716.00,1029.60,130,PHR-0033,Vitamins,13.20,7.92
+2026-05,North,Omega-3 Fish Oil Softgels,2646.50,1587.90,134,PHR-0034,Vitamins,19.75,11.85
+2026-05,North,Iron Plus Folic Acid Tablets,1786.15,1071.69,139,PHR-0035,Vitamins,12.85,7.71
+2026-05,North,Calcium Magnesium Zinc Caplets,2246.40,1347.84,144,PHR-0036,Vitamins,15.60,9.36
+2026-05,North,B-Complex Energy Capsules,2123.25,1273.95,149,PHR-0037,Vitamins,14.25,8.55
+2026-05,North,Kids Berry Multivitamin Gummies,2679.60,1607.76,154,PHR-0038,Vitamins,17.40,10.44
+2026-05,North,Biotin 5000 mcg Tablets,1690.60,1014.36,158,PHR-0039,Vitamins,10.70,6.42
+2026-05,North,Prenatal Complete Capsules,3471.90,2083.14,163,PHR-0040,Vitamins,21.30,12.78
+2026-05,South,SolarGuard SPF 50 Face Lotion,2734.56,1585.44,144,PHR-0001,Sun Protection,18.99,11.01
+2026-05,South,SunShield SPF 30 Body Spray,2173.50,1260.00,150,PHR-0002,Sun Protection,14.49,8.40
+2026-05,South,Mineral Defense SPF 40 Cream,3393.00,1968.72,156,PHR-0003,Sun Protection,21.75,12.62
+2026-05,South,Kids SunSafe SPF 50 Lotion,2616.25,1518.23,161,PHR-0004,Sun Protection,16.25,9.43
+2026-05,South,Daily UV Defense SPF 25 Moisturizer,2972.60,1723.44,167,PHR-0005,Sun Protection,17.80,10.32
+2026-05,South,SportBlock SPF 50 Gel,3390.80,1967.01,173,PHR-0006,Sun Protection,19.60,11.37
+2026-05,South,Clear Face SPF 35 Fluid,3955.90,2294.78,179,PHR-0007,Sun Protection,22.10,12.82
+2026-05,South,After Sun Cooling Aloe Gel,2198.80,1275.12,184,PHR-0008,Sun Protection,11.95,6.93
+2026-05,South,Lip Protect SPF 30 Balm,1092.50,634.60,190,PHR-0009,Sun Protection,5.75,3.34
+2026-05,South,UltraLight SPF 45 Mist,3116.40,1807.12,196,PHR-0010,Sun Protection,15.90,9.22
+2026-05,South,ColdEase Daytime Capsules,901.55,558.60,95,PHR-0011,Cold and Flu,9.49,5.88
+2026-05,South,ColdEase Nighttime Syrup,1004.50,623.28,98,PHR-0012,Cold and Flu,10.25,6.36
+2026-05,South,BreatheFree Nasal Spray,892.50,553.86,102,PHR-0013,Cold and Flu,8.75,5.43
+2026-05,South,ThroatCalm Honey Lozenges,678.40,420.82,106,PHR-0014,Cold and Flu,6.40,3.97
+2026-05,South,FluRelief Multi-Symptom Tablets,1386.00,859.10,110,PHR-0015,Cold and Flu,12.60,7.81
+2026-05,South,ChestClear Expectorant Syrup,1276.90,792.13,113,PHR-0016,Cold and Flu,11.30,7.01
+2026-05,South,SinusComfort Caplets,1164.15,721.89,117,PHR-0017,Cold and Flu,9.95,6.17
+2026-05,South,Junior Fever and Cold Liquid,992.20,614.68,121,PHR-0018,Cold and Flu,8.20,5.08
+2026-05,South,Menthol Comfort Vapor Rub,893.75,553.75,125,PHR-0019,Cold and Flu,7.15,4.43
+2026-05,South,Rapid Relief Cough Drops,625.65,388.29,129,PHR-0020,Cold and Flu,4.85,3.01
+2026-05,South,HydraSilk Daily Face Cream,2058.00,1070.16,84,PHR-0021,Cosmetics,24.50,12.74
+2026-05,South,Velvet Matte Foundation - Medium,2370.75,1232.79,87,PHR-0022,Cosmetics,27.25,14.17
+2026-05,South,GentleGlow Facial Cleanser,1237.50,643.50,90,PHR-0023,Cosmetics,13.75,7.15
+2026-05,South,Renewal Retinol Night Serum,3092.60,1608.34,94,PHR-0024,Cosmetics,32.90,17.11
+2026-05,South,Botanical Rose Lip Tint,1202.80,625.65,97,PHR-0025,Cosmetics,12.40,6.45
+2026-05,South,Brightening Vitamin C Serum,2960.00,1539.00,100,PHR-0026,Cosmetics,29.60,15.39
+2026-05,South,SoftTouch Micellar Water,1138.80,591.76,104,PHR-0027,Cosmetics,10.95,5.69
+2026-05,South,Nourishing Shea Body Lotion,1637.10,851.72,107,PHR-0028,Cosmetics,15.30,7.96
+2026-05,South,Precision Volume Mascara,2035.00,1058.20,110,PHR-0029,Cosmetics,18.50,9.62
+2026-05,South,Calming Oat Facial Mask,1915.20,996.36,114,PHR-0030,Cosmetics,16.80,8.74
+2026-05,South,Daily Complete Multivitamin,1830.60,1098.36,108,PHR-0031,Vitamins,16.95,10.17
+2026-05,South,Vitamin D3 2000 IU Softgels,1282.40,769.44,112,PHR-0032,Vitamins,11.45,6.87
+2026-05,South,Vitamin C 1000 mg Tablets,1544.40,926.64,117,PHR-0033,Vitamins,13.20,7.92
+2026-05,South,Omega-3 Fish Oil Softgels,2389.75,1433.85,121,PHR-0034,Vitamins,19.75,11.85
+2026-05,South,Iron Plus Folic Acid Tablets,1606.25,963.75,125,PHR-0035,Vitamins,12.85,7.71
+2026-05,South,Calcium Magnesium Zinc Caplets,2028.00,1216.80,130,PHR-0036,Vitamins,15.60,9.36
+2026-05,South,B-Complex Energy Capsules,1909.50,1145.70,134,PHR-0037,Vitamins,14.25,8.55
+2026-05,South,Kids Berry Multivitamin Gummies,2401.20,1440.72,138,PHR-0038,Vitamins,17.40,10.44
+2026-05,South,Biotin 5000 mcg Tablets,1530.10,918.06,143,PHR-0039,Vitamins,10.70,6.42
+2026-05,South,Prenatal Complete Capsules,3131.10,1878.66,147,PHR-0040,Vitamins,21.30,12.78
+2026-05,East,SolarGuard SPF 50 Face Lotion,3342.24,1937.76,176,PHR-0001,Sun Protection,18.99,11.01
+2026-05,East,SunShield SPF 30 Body Spray,2651.67,1537.20,183,PHR-0002,Sun Protection,14.49,8.40
+2026-05,East,Mineral Defense SPF 40 Cream,4132.50,2397.80,190,PHR-0003,Sun Protection,21.75,12.62
+2026-05,East,Kids SunSafe SPF 50 Lotion,3201.25,1857.71,197,PHR-0004,Sun Protection,16.25,9.43
+2026-05,East,Daily UV Defense SPF 25 Moisturizer,3631.20,2105.28,204,PHR-0005,Sun Protection,17.80,10.32
+2026-05,East,SportBlock SPF 50 Gel,4135.60,2399.07,211,PHR-0006,Sun Protection,19.60,11.37
+2026-05,East,Clear Face SPF 35 Fluid,4817.80,2794.76,218,PHR-0007,Sun Protection,22.10,12.82
+2026-05,East,After Sun Cooling Aloe Gel,2688.75,1559.25,225,PHR-0008,Sun Protection,11.95,6.93
+2026-05,East,Lip Protect SPF 30 Balm,1334.00,774.88,232,PHR-0009,Sun Protection,5.75,3.34
+2026-05,East,UltraLight SPF 45 Mist,3800.10,2203.58,239,PHR-0010,Sun Protection,15.90,9.22
+2026-05,East,ColdEase Daytime Capsules,1100.84,682.08,116,PHR-0011,Cold and Flu,9.49,5.88
+2026-05,East,ColdEase Nighttime Syrup,1230.00,763.20,120,PHR-0012,Cold and Flu,10.25,6.36
+2026-05,East,BreatheFree Nasal Spray,1093.75,678.75,125,PHR-0013,Cold and Flu,8.75,5.43
+2026-05,East,ThroatCalm Honey Lozenges,825.60,512.13,129,PHR-0014,Cold and Flu,6.40,3.97
+2026-05,East,FluRelief Multi-Symptom Tablets,1688.40,1046.54,134,PHR-0015,Cold and Flu,12.60,7.81
+2026-05,East,ChestClear Expectorant Syrup,1570.70,974.39,139,PHR-0016,Cold and Flu,11.30,7.01
+2026-05,East,SinusComfort Caplets,1422.85,882.31,143,PHR-0017,Cold and Flu,9.95,6.17
+2026-05,East,Junior Fever and Cold Liquid,1213.60,751.84,148,PHR-0018,Cold and Flu,8.20,5.08
+2026-05,East,Menthol Comfort Vapor Rub,1086.80,673.36,152,PHR-0019,Cold and Flu,7.15,4.43
+2026-05,East,Rapid Relief Cough Drops,761.45,472.57,157,PHR-0020,Cold and Flu,4.85,3.01
+2026-05,East,HydraSilk Daily Face Cream,2499.00,1299.48,102,PHR-0021,Cosmetics,24.50,12.74
+2026-05,East,Velvet Matte Foundation - Medium,2888.50,1502.02,106,PHR-0022,Cosmetics,27.25,14.17
+2026-05,East,GentleGlow Facial Cleanser,1512.50,786.50,110,PHR-0023,Cosmetics,13.75,7.15
+2026-05,East,Renewal Retinol Night Serum,3750.60,1950.54,114,PHR-0024,Cosmetics,32.90,17.11
+2026-05,East,Botanical Rose Lip Tint,1463.20,761.10,118,PHR-0025,Cosmetics,12.40,6.45
+2026-05,East,Brightening Vitamin C Serum,3611.20,1877.58,122,PHR-0026,Cosmetics,29.60,15.39
+2026-05,East,SoftTouch Micellar Water,1390.65,722.63,127,PHR-0027,Cosmetics,10.95,5.69
+2026-05,East,Nourishing Shea Body Lotion,2004.30,1042.76,131,PHR-0028,Cosmetics,15.30,7.96
+2026-05,East,Precision Volume Mascara,2497.50,1298.70,135,PHR-0029,Cosmetics,18.50,9.62
+2026-05,East,Calming Oat Facial Mask,2335.20,1214.86,139,PHR-0030,Cosmetics,16.80,8.74
+2026-05,East,Daily Complete Multivitamin,2237.40,1342.44,132,PHR-0031,Vitamins,16.95,10.17
+2026-05,East,Vitamin D3 2000 IU Softgels,1568.65,941.19,137,PHR-0032,Vitamins,11.45,6.87
+2026-05,East,Vitamin C 1000 mg Tablets,1887.60,1132.56,143,PHR-0033,Vitamins,13.20,7.92
+2026-05,East,Omega-3 Fish Oil Softgels,2923.00,1753.80,148,PHR-0034,Vitamins,19.75,11.85
+2026-05,East,Iron Plus Folic Acid Tablets,1966.05,1179.63,153,PHR-0035,Vitamins,12.85,7.71
+2026-05,East,Calcium Magnesium Zinc Caplets,2464.80,1478.88,158,PHR-0036,Vitamins,15.60,9.36
+2026-05,East,B-Complex Energy Capsules,2337.00,1402.20,164,PHR-0037,Vitamins,14.25,8.55
+2026-05,East,Kids Berry Multivitamin Gummies,2940.60,1764.36,169,PHR-0038,Vitamins,17.40,10.44
+2026-05,East,Biotin 5000 mcg Tablets,1861.80,1117.08,174,PHR-0039,Vitamins,10.70,6.42
+2026-05,East,Prenatal Complete Capsules,3834.00,2300.40,180,PHR-0040,Vitamins,21.30,12.78
+2026-05,West,SolarGuard SPF 50 Face Lotion,3646.08,2113.92,192,PHR-0001,Sun Protection,18.99,11.01
+2026-05,West,SunShield SPF 30 Body Spray,2898.00,1680.00,200,PHR-0002,Sun Protection,14.49,8.40
+2026-05,West,Mineral Defense SPF 40 Cream,4502.25,2612.34,207,PHR-0003,Sun Protection,21.75,12.62
+2026-05,West,Kids SunSafe SPF 50 Lotion,3493.75,2027.45,215,PHR-0004,Sun Protection,16.25,9.43
+2026-05,West,Daily UV Defense SPF 25 Moisturizer,3969.40,2301.36,223,PHR-0005,Sun Protection,17.80,10.32
+2026-05,West,SportBlock SPF 50 Gel,4508.00,2615.10,230,PHR-0006,Sun Protection,19.60,11.37
+2026-05,West,Clear Face SPF 35 Fluid,5259.80,3051.16,238,PHR-0007,Sun Protection,22.10,12.82
+2026-05,West,After Sun Cooling Aloe Gel,2939.70,1704.78,246,PHR-0008,Sun Protection,11.95,6.93
+2026-05,West,Lip Protect SPF 30 Balm,1454.75,845.02,253,PHR-0009,Sun Protection,5.75,3.34
+2026-05,West,UltraLight SPF 45 Mist,4149.90,2406.42,261,PHR-0010,Sun Protection,15.90,9.22
+2026-05,West,ColdEase Daytime Capsules,1195.74,740.88,126,PHR-0011,Cold and Flu,9.49,5.88
+2026-05,West,ColdEase Nighttime Syrup,1342.75,833.16,131,PHR-0012,Cold and Flu,10.25,6.36
+2026-05,West,BreatheFree Nasal Spray,1190.00,738.48,136,PHR-0013,Cold and Flu,8.75,5.43
+2026-05,West,ThroatCalm Honey Lozenges,902.40,559.77,141,PHR-0014,Cold and Flu,6.40,3.97
+2026-05,West,FluRelief Multi-Symptom Tablets,1839.60,1140.26,146,PHR-0015,Cold and Flu,12.60,7.81
+2026-05,West,ChestClear Expectorant Syrup,1706.30,1058.51,151,PHR-0016,Cold and Flu,11.30,7.01
+2026-05,West,SinusComfort Caplets,1552.20,962.52,156,PHR-0017,Cold and Flu,9.95,6.17
+2026-05,West,Junior Fever and Cold Liquid,1320.20,817.88,161,PHR-0018,Cold and Flu,8.20,5.08
+2026-05,West,Menthol Comfort Vapor Rub,1186.90,735.38,166,PHR-0019,Cold and Flu,7.15,4.43
+2026-05,West,Rapid Relief Cough Drops,829.35,514.71,171,PHR-0020,Cold and Flu,4.85,3.01
+2026-05,West,HydraSilk Daily Face Cream,2719.50,1414.14,111,PHR-0021,Cosmetics,24.50,12.74
+2026-05,West,Velvet Matte Foundation - Medium,3161.00,1643.72,116,PHR-0022,Cosmetics,27.25,14.17
+2026-05,West,GentleGlow Facial Cleanser,1650.00,858.00,120,PHR-0023,Cosmetics,13.75,7.15
+2026-05,West,Renewal Retinol Night Serum,4112.50,2138.75,125,PHR-0024,Cosmetics,32.90,17.11
+2026-05,West,Botanical Rose Lip Tint,1599.60,832.05,129,PHR-0025,Cosmetics,12.40,6.45
+2026-05,West,Brightening Vitamin C Serum,3966.40,2062.26,134,PHR-0026,Cosmetics,29.60,15.39
+2026-05,West,SoftTouch Micellar Water,1511.10,785.22,138,PHR-0027,Cosmetics,10.95,5.69
+2026-05,West,Nourishing Shea Body Lotion,2187.90,1138.28,143,PHR-0028,Cosmetics,15.30,7.96
+2026-05,West,Precision Volume Mascara,2719.50,1414.14,147,PHR-0029,Cosmetics,18.50,9.62
+2026-05,West,Calming Oat Facial Mask,2536.80,1319.74,151,PHR-0030,Cosmetics,16.80,8.74
+2026-05,West,Daily Complete Multivitamin,2440.80,1464.48,144,PHR-0031,Vitamins,16.95,10.17
+2026-05,West,Vitamin D3 2000 IU Softgels,1717.50,1030.50,150,PHR-0032,Vitamins,11.45,6.87
+2026-05,West,Vitamin C 1000 mg Tablets,2059.20,1235.52,156,PHR-0033,Vitamins,13.20,7.92
+2026-05,West,Omega-3 Fish Oil Softgels,3179.75,1907.85,161,PHR-0034,Vitamins,19.75,11.85
+2026-05,West,Iron Plus Folic Acid Tablets,2145.95,1287.57,167,PHR-0035,Vitamins,12.85,7.71
+2026-05,West,Calcium Magnesium Zinc Caplets,2698.80,1619.28,173,PHR-0036,Vitamins,15.60,9.36
+2026-05,West,B-Complex Energy Capsules,2550.75,1530.45,179,PHR-0037,Vitamins,14.25,8.55
+2026-05,West,Kids Berry Multivitamin Gummies,3201.60,1920.96,184,PHR-0038,Vitamins,17.40,10.44
+2026-05,West,Biotin 5000 mcg Tablets,2033.00,1219.80,190,PHR-0039,Vitamins,10.70,6.42
+2026-05,West,Prenatal Complete Capsules,4174.80,2504.88,196,PHR-0040,Vitamins,21.30,12.78
+2026-06,North,SolarGuard SPF 50 Face Lotion,3798.00,2202.00,200,PHR-0001,Sun Protection,18.99,11.01
+2026-06,North,SunShield SPF 30 Body Spray,3013.92,1747.20,208,PHR-0002,Sun Protection,14.49,8.40
+2026-06,North,Mineral Defense SPF 40 Cream,4698.00,2725.92,216,PHR-0003,Sun Protection,21.75,12.62
+2026-06,North,Kids SunSafe SPF 50 Lotion,3640.00,2112.32,224,PHR-0004,Sun Protection,16.25,9.43
+2026-06,North,Daily UV Defense SPF 25 Moisturizer,4129.60,2394.24,232,PHR-0005,Sun Protection,17.80,10.32
+2026-06,North,SportBlock SPF 50 Gel,4704.00,2728.80,240,PHR-0006,Sun Protection,19.60,11.37
+2026-06,North,Clear Face SPF 35 Fluid,5480.80,3179.36,248,PHR-0007,Sun Protection,22.10,12.82
+2026-06,North,After Sun Cooling Aloe Gel,3059.20,1774.08,256,PHR-0008,Sun Protection,11.95,6.93
+2026-06,North,Lip Protect SPF 30 Balm,1518.00,881.76,264,PHR-0009,Sun Protection,5.75,3.34
+2026-06,North,UltraLight SPF 45 Mist,4324.80,2507.84,272,PHR-0010,Sun Protection,15.90,9.22
+2026-06,North,ColdEase Daytime Capsules,854.10,529.20,90,PHR-0011,Cold and Flu,9.49,5.88
+2026-06,North,ColdEase Nighttime Syrup,963.50,597.84,94,PHR-0012,Cold and Flu,10.25,6.36
+2026-06,North,BreatheFree Nasal Spray,848.75,526.71,97,PHR-0013,Cold and Flu,8.75,5.43
+2026-06,North,ThroatCalm Honey Lozenges,646.40,400.97,101,PHR-0014,Cold and Flu,6.40,3.97
+2026-06,North,FluRelief Multi-Symptom Tablets,1310.40,812.24,104,PHR-0015,Cold and Flu,12.60,7.81
+2026-06,North,ChestClear Expectorant Syrup,1220.40,757.08,108,PHR-0016,Cold and Flu,11.30,7.01
+2026-06,North,SinusComfort Caplets,1114.40,691.04,112,PHR-0017,Cold and Flu,9.95,6.17
+2026-06,North,Junior Fever and Cold Liquid,943.00,584.20,115,PHR-0018,Cold and Flu,8.20,5.08
+2026-06,North,Menthol Comfort Vapor Rub,850.85,527.17,119,PHR-0019,Cold and Flu,7.15,4.43
+2026-06,North,Rapid Relief Cough Drops,591.70,367.22,122,PHR-0020,Cold and Flu,4.85,3.01
+2026-06,North,HydraSilk Daily Face Cream,2352.00,1223.04,96,PHR-0021,Cosmetics,24.50,12.74
+2026-06,North,Velvet Matte Foundation - Medium,2725.00,1417.00,100,PHR-0022,Cosmetics,27.25,14.17
+2026-06,North,GentleGlow Facial Cleanser,1430.00,743.60,104,PHR-0023,Cosmetics,13.75,7.15
+2026-06,North,Renewal Retinol Night Serum,3553.20,1847.88,108,PHR-0024,Cosmetics,32.90,17.11
+2026-06,North,Botanical Rose Lip Tint,1376.40,715.95,111,PHR-0025,Cosmetics,12.40,6.45
+2026-06,North,Brightening Vitamin C Serum,3404.00,1769.85,115,PHR-0026,Cosmetics,29.60,15.39
+2026-06,North,SoftTouch Micellar Water,1303.05,677.11,119,PHR-0027,Cosmetics,10.95,5.69
+2026-06,North,Nourishing Shea Body Lotion,1881.90,979.08,123,PHR-0028,Cosmetics,15.30,7.96
+2026-06,North,Precision Volume Mascara,2349.50,1221.74,127,PHR-0029,Cosmetics,18.50,9.62
+2026-06,North,Calming Oat Facial Mask,2200.80,1144.94,131,PHR-0030,Cosmetics,16.80,8.74
+2026-06,North,Daily Complete Multivitamin,2067.90,1240.74,122,PHR-0031,Vitamins,16.95,10.17
+2026-06,North,Vitamin D3 2000 IU Softgels,1454.15,872.49,127,PHR-0032,Vitamins,11.45,6.87
+2026-06,North,Vitamin C 1000 mg Tablets,1742.40,1045.44,132,PHR-0033,Vitamins,13.20,7.92
+2026-06,North,Omega-3 Fish Oil Softgels,2705.75,1623.45,137,PHR-0034,Vitamins,19.75,11.85
+2026-06,North,Iron Plus Folic Acid Tablets,1824.70,1094.82,142,PHR-0035,Vitamins,12.85,7.71
+2026-06,North,Calcium Magnesium Zinc Caplets,2293.20,1375.92,147,PHR-0036,Vitamins,15.60,9.36
+2026-06,North,B-Complex Energy Capsules,2166.00,1299.60,152,PHR-0037,Vitamins,14.25,8.55
+2026-06,North,Kids Berry Multivitamin Gummies,2731.80,1639.08,157,PHR-0038,Vitamins,17.40,10.44
+2026-06,North,Biotin 5000 mcg Tablets,1733.40,1040.04,162,PHR-0039,Vitamins,10.70,6.42
+2026-06,North,Prenatal Complete Capsules,3535.80,2121.48,166,PHR-0040,Vitamins,21.30,12.78
+2026-06,South,SolarGuard SPF 50 Face Lotion,3418.20,1981.80,180,PHR-0001,Sun Protection,18.99,11.01
+2026-06,South,SunShield SPF 30 Body Spray,2709.63,1570.80,187,PHR-0002,Sun Protection,14.49,8.40
+2026-06,South,Mineral Defense SPF 40 Cream,4219.50,2448.28,194,PHR-0003,Sun Protection,21.75,12.62
+2026-06,South,Kids SunSafe SPF 50 Lotion,3282.50,1904.86,202,PHR-0004,Sun Protection,16.25,9.43
+2026-06,South,Daily UV Defense SPF 25 Moisturizer,3720.20,2156.88,209,PHR-0005,Sun Protection,17.80,10.32
+2026-06,South,SportBlock SPF 50 Gel,4233.60,2455.92,216,PHR-0006,Sun Protection,19.60,11.37
+2026-06,South,Clear Face SPF 35 Fluid,4928.30,2858.86,223,PHR-0007,Sun Protection,22.10,12.82
+2026-06,South,After Sun Cooling Aloe Gel,2748.50,1593.90,230,PHR-0008,Sun Protection,11.95,6.93
+2026-06,South,Lip Protect SPF 30 Balm,1368.50,794.92,238,PHR-0009,Sun Protection,5.75,3.34
+2026-06,South,UltraLight SPF 45 Mist,3895.50,2258.90,245,PHR-0010,Sun Protection,15.90,9.22
+2026-06,South,ColdEase Daytime Capsules,768.69,476.28,81,PHR-0011,Cold and Flu,9.49,5.88
+2026-06,South,ColdEase Nighttime Syrup,861.00,534.24,84,PHR-0012,Cold and Flu,10.25,6.36
+2026-06,South,BreatheFree Nasal Spray,761.25,472.41,87,PHR-0013,Cold and Flu,8.75,5.43
+2026-06,South,ThroatCalm Honey Lozenges,582.40,361.27,91,PHR-0014,Cold and Flu,6.40,3.97
+2026-06,South,FluRelief Multi-Symptom Tablets,1184.40,734.14,94,PHR-0015,Cold and Flu,12.60,7.81
+2026-06,South,ChestClear Expectorant Syrup,1096.10,679.97,97,PHR-0016,Cold and Flu,11.30,7.01
+2026-06,South,SinusComfort Caplets,995.00,617.00,100,PHR-0017,Cold and Flu,9.95,6.17
+2026-06,South,Junior Fever and Cold Liquid,852.80,528.32,104,PHR-0018,Cold and Flu,8.20,5.08
+2026-06,South,Menthol Comfort Vapor Rub,765.05,474.01,107,PHR-0019,Cold and Flu,7.15,4.43
+2026-06,South,Rapid Relief Cough Drops,533.50,331.10,110,PHR-0020,Cold and Flu,4.85,3.01
+2026-06,South,HydraSilk Daily Face Cream,2107.00,1095.64,86,PHR-0021,Cosmetics,24.50,12.74
+2026-06,South,Velvet Matte Foundation - Medium,2452.50,1275.30,90,PHR-0022,Cosmetics,27.25,14.17
+2026-06,South,GentleGlow Facial Cleanser,1278.75,664.95,93,PHR-0023,Cosmetics,13.75,7.15
+2026-06,South,Renewal Retinol Night Serum,3191.30,1659.67,97,PHR-0024,Cosmetics,32.90,17.11
+2026-06,South,Botanical Rose Lip Tint,1240.00,645.00,100,PHR-0025,Cosmetics,12.40,6.45
+2026-06,South,Brightening Vitamin C Serum,3078.40,1600.56,104,PHR-0026,Cosmetics,29.60,15.39
+2026-06,South,SoftTouch Micellar Water,1171.65,608.83,107,PHR-0027,Cosmetics,10.95,5.69
+2026-06,South,Nourishing Shea Body Lotion,1698.30,883.56,111,PHR-0028,Cosmetics,15.30,7.96
+2026-06,South,Precision Volume Mascara,2109.00,1096.68,114,PHR-0029,Cosmetics,18.50,9.62
+2026-06,South,Calming Oat Facial Mask,1982.40,1031.32,118,PHR-0030,Cosmetics,16.80,8.74
+2026-06,South,Daily Complete Multivitamin,1864.50,1118.70,110,PHR-0031,Vitamins,16.95,10.17
+2026-06,South,Vitamin D3 2000 IU Softgels,1316.75,790.05,115,PHR-0032,Vitamins,11.45,6.87
+2026-06,South,Vitamin C 1000 mg Tablets,1570.80,942.48,119,PHR-0033,Vitamins,13.20,7.92
+2026-06,South,Omega-3 Fish Oil Softgels,2429.25,1457.55,123,PHR-0034,Vitamins,19.75,11.85
+2026-06,South,Iron Plus Folic Acid Tablets,1644.80,986.88,128,PHR-0035,Vitamins,12.85,7.71
+2026-06,South,Calcium Magnesium Zinc Caplets,2059.20,1235.52,132,PHR-0036,Vitamins,15.60,9.36
+2026-06,South,B-Complex Energy Capsules,1952.25,1171.35,137,PHR-0037,Vitamins,14.25,8.55
+2026-06,South,Kids Berry Multivitamin Gummies,2453.40,1472.04,141,PHR-0038,Vitamins,17.40,10.44
+2026-06,South,Biotin 5000 mcg Tablets,1551.50,930.90,145,PHR-0039,Vitamins,10.70,6.42
+2026-06,South,Prenatal Complete Capsules,3195.00,1917.00,150,PHR-0040,Vitamins,21.30,12.78
+2026-06,East,SolarGuard SPF 50 Face Lotion,4177.80,2422.20,220,PHR-0001,Sun Protection,18.99,11.01
+2026-06,East,SunShield SPF 30 Body Spray,3318.21,1923.60,229,PHR-0002,Sun Protection,14.49,8.40
+2026-06,East,Mineral Defense SPF 40 Cream,5176.50,3003.56,238,PHR-0003,Sun Protection,21.75,12.62
+2026-06,East,Kids SunSafe SPF 50 Lotion,3997.50,2319.78,246,PHR-0004,Sun Protection,16.25,9.43
+2026-06,East,Daily UV Defense SPF 25 Moisturizer,4539.00,2631.60,255,PHR-0005,Sun Protection,17.80,10.32
+2026-06,East,SportBlock SPF 50 Gel,5174.40,3001.68,264,PHR-0006,Sun Protection,19.60,11.37
+2026-06,East,Clear Face SPF 35 Fluid,6033.30,3499.86,273,PHR-0007,Sun Protection,22.10,12.82
+2026-06,East,After Sun Cooling Aloe Gel,3369.90,1954.26,282,PHR-0008,Sun Protection,11.95,6.93
+2026-06,East,Lip Protect SPF 30 Balm,1667.50,968.60,290,PHR-0009,Sun Protection,5.75,3.34
+2026-06,East,UltraLight SPF 45 Mist,4754.10,2756.78,299,PHR-0010,Sun Protection,15.90,9.22
+2026-06,East,ColdEase Daytime Capsules,939.51,582.12,99,PHR-0011,Cold and Flu,9.49,5.88
+2026-06,East,ColdEase Nighttime Syrup,1055.75,655.08,103,PHR-0012,Cold and Flu,10.25,6.36
+2026-06,East,BreatheFree Nasal Spray,936.25,581.01,107,PHR-0013,Cold and Flu,8.75,5.43
+2026-06,East,ThroatCalm Honey Lozenges,710.40,440.67,111,PHR-0014,Cold and Flu,6.40,3.97
+2026-06,East,FluRelief Multi-Symptom Tablets,1449.00,898.15,115,PHR-0015,Cold and Flu,12.60,7.81
+2026-06,East,ChestClear Expectorant Syrup,1344.70,834.19,119,PHR-0016,Cold and Flu,11.30,7.01
+2026-06,East,SinusComfort Caplets,1223.85,758.91,123,PHR-0017,Cold and Flu,9.95,6.17
+2026-06,East,Junior Fever and Cold Liquid,1041.40,645.16,127,PHR-0018,Cold and Flu,8.20,5.08
+2026-06,East,Menthol Comfort Vapor Rub,936.65,580.33,131,PHR-0019,Cold and Flu,7.15,4.43
+2026-06,East,Rapid Relief Cough Drops,654.75,406.35,135,PHR-0020,Cold and Flu,4.85,3.01
+2026-06,East,HydraSilk Daily Face Cream,2597.00,1350.44,106,PHR-0021,Cosmetics,24.50,12.74
+2026-06,East,Velvet Matte Foundation - Medium,2997.50,1558.70,110,PHR-0022,Cosmetics,27.25,14.17
+2026-06,East,GentleGlow Facial Cleanser,1567.50,815.10,114,PHR-0023,Cosmetics,13.75,7.15
+2026-06,East,Renewal Retinol Night Serum,3882.20,2018.98,118,PHR-0024,Cosmetics,32.90,17.11
+2026-06,East,Botanical Rose Lip Tint,1512.80,786.90,122,PHR-0025,Cosmetics,12.40,6.45
+2026-06,East,Brightening Vitamin C Serum,3759.20,1954.53,127,PHR-0026,Cosmetics,29.60,15.39
+2026-06,East,SoftTouch Micellar Water,1434.45,745.39,131,PHR-0027,Cosmetics,10.95,5.69
+2026-06,East,Nourishing Shea Body Lotion,2065.50,1074.60,135,PHR-0028,Cosmetics,15.30,7.96
+2026-06,East,Precision Volume Mascara,2571.50,1337.18,139,PHR-0029,Cosmetics,18.50,9.62
+2026-06,East,Calming Oat Facial Mask,2419.20,1258.56,144,PHR-0030,Cosmetics,16.80,8.74
+2026-06,East,Daily Complete Multivitamin,2288.25,1372.95,135,PHR-0031,Vitamins,16.95,10.17
+2026-06,East,Vitamin D3 2000 IU Softgels,1603.00,961.80,140,PHR-0032,Vitamins,11.45,6.87
+2026-06,East,Vitamin C 1000 mg Tablets,1914.00,1148.40,145,PHR-0033,Vitamins,13.20,7.92
+2026-06,East,Omega-3 Fish Oil Softgels,2982.25,1789.35,151,PHR-0034,Vitamins,19.75,11.85
+2026-06,East,Iron Plus Folic Acid Tablets,2004.60,1202.76,156,PHR-0035,Vitamins,12.85,7.71
+2026-06,East,Calcium Magnesium Zinc Caplets,2527.20,1516.32,162,PHR-0036,Vitamins,15.60,9.36
+2026-06,East,B-Complex Energy Capsules,2379.75,1427.85,167,PHR-0037,Vitamins,14.25,8.55
+2026-06,East,Kids Berry Multivitamin Gummies,2992.80,1795.68,172,PHR-0038,Vitamins,17.40,10.44
+2026-06,East,Biotin 5000 mcg Tablets,1904.60,1142.76,178,PHR-0039,Vitamins,10.70,6.42
+2026-06,East,Prenatal Complete Capsules,3897.90,2338.74,183,PHR-0040,Vitamins,21.30,12.78
+2026-06,West,SolarGuard SPF 50 Face Lotion,4557.60,2642.40,240,PHR-0001,Sun Protection,18.99,11.01
+2026-06,West,SunShield SPF 30 Body Spray,3622.50,2100.00,250,PHR-0002,Sun Protection,14.49,8.40
+2026-06,West,Mineral Defense SPF 40 Cream,5633.25,3268.58,259,PHR-0003,Sun Protection,21.75,12.62
+2026-06,West,Kids SunSafe SPF 50 Lotion,4371.25,2536.67,269,PHR-0004,Sun Protection,16.25,9.43
+2026-06,West,Daily UV Defense SPF 25 Moisturizer,4948.40,2868.96,278,PHR-0005,Sun Protection,17.80,10.32
+2026-06,West,SportBlock SPF 50 Gel,5644.80,3274.56,288,PHR-0006,Sun Protection,19.60,11.37
+2026-06,West,Clear Face SPF 35 Fluid,6585.80,3820.36,298,PHR-0007,Sun Protection,22.10,12.82
+2026-06,West,After Sun Cooling Aloe Gel,3668.65,2127.51,307,PHR-0008,Sun Protection,11.95,6.93
+2026-06,West,Lip Protect SPF 30 Balm,1822.75,1058.78,317,PHR-0009,Sun Protection,5.75,3.34
+2026-06,West,UltraLight SPF 45 Mist,5183.40,3005.72,326,PHR-0010,Sun Protection,15.90,9.22
+2026-06,West,ColdEase Daytime Capsules,1024.92,635.04,108,PHR-0011,Cold and Flu,9.49,5.88
+2026-06,West,ColdEase Nighttime Syrup,1148.00,712.32,112,PHR-0012,Cold and Flu,10.25,6.36
+2026-06,West,BreatheFree Nasal Spray,1023.75,635.31,117,PHR-0013,Cold and Flu,8.75,5.43
+2026-06,West,ThroatCalm Honey Lozenges,774.40,480.37,121,PHR-0014,Cold and Flu,6.40,3.97
+2026-06,West,FluRelief Multi-Symptom Tablets,1575.00,976.25,125,PHR-0015,Cold and Flu,12.60,7.81
+2026-06,West,ChestClear Expectorant Syrup,1469.00,911.30,130,PHR-0016,Cold and Flu,11.30,7.01
+2026-06,West,SinusComfort Caplets,1333.30,826.78,134,PHR-0017,Cold and Flu,9.95,6.17
+2026-06,West,Junior Fever and Cold Liquid,1131.60,701.04,138,PHR-0018,Cold and Flu,8.20,5.08
+2026-06,West,Menthol Comfort Vapor Rub,1022.45,633.49,143,PHR-0019,Cold and Flu,7.15,4.43
+2026-06,West,Rapid Relief Cough Drops,712.95,442.47,147,PHR-0020,Cold and Flu,4.85,3.01
+2026-06,West,HydraSilk Daily Face Cream,2817.50,1465.10,115,PHR-0021,Cosmetics,24.50,12.74
+2026-06,West,Velvet Matte Foundation - Medium,3270.00,1700.40,120,PHR-0022,Cosmetics,27.25,14.17
+2026-06,West,GentleGlow Facial Cleanser,1705.00,886.60,124,PHR-0023,Cosmetics,13.75,7.15
+2026-06,West,Renewal Retinol Night Serum,4244.10,2207.19,129,PHR-0024,Cosmetics,32.90,17.11
+2026-06,West,Botanical Rose Lip Tint,1661.60,864.30,134,PHR-0025,Cosmetics,12.40,6.45
+2026-06,West,Brightening Vitamin C Serum,4084.80,2123.82,138,PHR-0026,Cosmetics,29.60,15.39
+2026-06,West,SoftTouch Micellar Water,1565.85,813.67,143,PHR-0027,Cosmetics,10.95,5.69
+2026-06,West,Nourishing Shea Body Lotion,2249.10,1170.12,147,PHR-0028,Cosmetics,15.30,7.96
+2026-06,West,Precision Volume Mascara,2812.00,1462.24,152,PHR-0029,Cosmetics,18.50,9.62
+2026-06,West,Calming Oat Facial Mask,2637.60,1372.18,157,PHR-0030,Cosmetics,16.80,8.74
+2026-06,West,Daily Complete Multivitamin,2491.65,1494.99,147,PHR-0031,Vitamins,16.95,10.17
+2026-06,West,Vitamin D3 2000 IU Softgels,1751.85,1051.11,153,PHR-0032,Vitamins,11.45,6.87
+2026-06,West,Vitamin C 1000 mg Tablets,2098.80,1259.28,159,PHR-0033,Vitamins,13.20,7.92
+2026-06,West,Omega-3 Fish Oil Softgels,3258.75,1955.25,165,PHR-0034,Vitamins,19.75,11.85
+2026-06,West,Iron Plus Folic Acid Tablets,2184.50,1310.70,170,PHR-0035,Vitamins,12.85,7.71
+2026-06,West,Calcium Magnesium Zinc Caplets,2745.60,1647.36,176,PHR-0036,Vitamins,15.60,9.36
+2026-06,West,B-Complex Energy Capsules,2593.50,1556.10,182,PHR-0037,Vitamins,14.25,8.55
+2026-06,West,Kids Berry Multivitamin Gummies,3271.20,1962.72,188,PHR-0038,Vitamins,17.40,10.44
+2026-06,West,Biotin 5000 mcg Tablets,2075.80,1245.48,194,PHR-0039,Vitamins,10.70,6.42
+2026-06,West,Prenatal Complete Capsules,4260.00,2556.00,200,PHR-0040,Vitamins,21.30,12.78

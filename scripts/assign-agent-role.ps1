@@ -27,20 +27,18 @@ if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($agentPrincipalId)) {
   throw 'Failed to retrieve the Agent identity principal ID.'
 }
 
-$assignmentCount = az role assignment list `
+$assignmentIds = @(az role assignment list `
   --assignee-object-id $agentPrincipalId `
   --role 'Foundry User' `
   --scope $projectId `
   --fill-principal-name false `
-  --query 'length(@)' `
-  --output tsv
-$assignmentCountText = ($assignmentCount | Out-String).Trim()
-$assignmentCountValue = 0
-if ($LASTEXITCODE -ne 0 -or -not [int]::TryParse($assignmentCountText, [ref]$assignmentCountValue)) {
+  --query '[].id' `
+  --output tsv)
+if ($LASTEXITCODE -ne 0) {
   throw 'Failed to check the Foundry User role assignment.'
 }
 
-if ($assignmentCountValue -eq 0) {
+if ($assignmentIds.Count -eq 0) {
   az role assignment create `
     --assignee-object-id $agentPrincipalId `
     --assignee-principal-type ServicePrincipal `
