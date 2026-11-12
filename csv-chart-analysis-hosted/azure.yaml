@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+name: csv-chart-analyst-hosted
+requiredVersions:
+  azd: '>=1.37.0'
+  extensions:
+    azure.ai.agents: '>=1.0.0'
+    azure.ai.projects: '>=1.0.0'
+services:
+  ai-project:
+    host: azure.ai.project
+    endpoint: https://cog-aq3tdqdbwqe2u.services.ai.azure.com/api/projects/csv-chart-analyst-dev
+  csv-chart-analyst-hosted:
+    host: azure.ai.agent
+    kind: hosted
+    name: csv-chart-analyst-hosted
+    displayName: Caldova Sales Analyst (Hosted)
+    description: Analyze Caldova commercial CSVs and generate downloadable charts.
+    project: src/csv-chart-analyst-hosted
+    language: python
+    codeConfiguration:
+      runtime: python_3_13
+      entryPoint: main.py
+      dependencyResolution: remote_build
+    protocols:
+      - protocol: responses
+        version: 2.0.0
+    env:
+      AZURE_AI_MODEL_DEPLOYMENT_NAME: ${AZURE_AI_MODEL_DEPLOYMENT_NAME}
+      PYTHONNOUSERSITE: "1"
+    uses:
+      - ai-project
+    container:
+      resources:
+        cpu: "0.5"
+        memory: 1Gi
+infra:
+  provider: microsoft.foundry

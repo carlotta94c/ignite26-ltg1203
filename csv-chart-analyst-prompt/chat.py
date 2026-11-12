@@ -15,7 +15,7 @@ import requests
 from azure.identity import AzureCliCredential
 
 AGENT_NAME = "csv-chart-analyst"
-MODEL_NAME = "gpt-5.4-mini"
+MODEL_NAME = "gpt-5.4-nano"
 
 
 def validated_project_endpoint(project_endpoint: str) -> str:
@@ -114,6 +114,7 @@ class FoundryClient:
             "background": True,
         }
 
+        print("Submitting analysis to Foundry...", file=sys.stderr, flush=True)
         response = self.request(
             "POST",
             f"{self.agent_endpoint}/responses?api-version=v1",
@@ -122,12 +123,28 @@ class FoundryClient:
         )
         result = response.json()
         response_id = result["id"]
-        deadline = time.monotonic() + 900
+        started = time.monotonic()
+        deadline = started + 900
+        last_status = None
+        last_progress = started
 
-        while result.get("status") in {"queued", "in_progress"}:
-            if time.monotonic() >= deadline:
+        while True:
+            now = time.monotonic()
+            status = result.get("status")
+            if status != last_status or now - last_progress >= 15:
+                print(
+                    f"Response {response_id}: {status} ({now - started:.0f}s elapsed)",
+                    file=sys.stderr,
+                    flush=True,
+                )
+                last_status = status
+                last_progress = now
+            if status not in {"queued", "in_progress"}:
+                return result
+            if now >= deadline:
                 raise TimeoutError(
-                    f"Response {response_id} is still {result.get('status')} after 15 minutes"
+                    f"Response {response_id} is still {status} after 15 minutes. "
+                    "Stopped local polling; the remote response was not cancelled."
                 )
             time.sleep(3)
             result = self.request(
@@ -135,8 +152,6 @@ class FoundryClient:
                 f"{self.agent_endpoint}/responses/{quote(response_id)}?api-version=v1",
                 headers=self.feature_headers,
             ).json()
-
-        return result
 
     def download_generated_file(self, file_id: str, output_path: Path) -> None:
         response = self.request(

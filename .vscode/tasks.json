@@ -1,0 +1,52 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Validate hosted agent ports",
+      "type": "aitk",
+      "command": "debug-check-prerequisites",
+      "args": { "portOccupancy": [5679, 8088] }
+    },
+    {
+      "label": "Run Caldova hosted agent",
+      "type": "process",
+      "command": "${workspaceFolder}\\csv-chart-analysis-hosted\\src\\csv-chart-analyst-hosted\\.venv\\Scripts\\python.exe",
+      "args": ["-m", "debugpy", "--listen", "127.0.0.1:5679", "main.py"],
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}\\csv-chart-analysis-hosted\\src\\csv-chart-analyst-hosted",
+        "env": {
+          "FOUNDRY_PROJECT_ENDPOINT": "https://cog-aq3tdqdbwqe2u.services.ai.azure.com/api/projects/csv-chart-analyst-dev",
+          "AZURE_AI_MODEL_DEPLOYMENT_NAME": "gpt-5.4-nano",
+          "HOST": "127.0.0.1",
+          "PORT": "8088"
+        }
+      },
+      "dependsOn": ["Validate hosted agent ports"],
+      "problemMatcher": {
+        "pattern": [{ "regexp": "^.*$", "file": 0, "location": 1, "message": 2 }],
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".*",
+          "endsPattern": "Application startup complete|[Rr]unning on|Started server process"
+        }
+      }
+    },
+    {
+      "label": "Open Caldova Agent Inspector",
+      "type": "shell",
+      "command": "echo '${input:openCaldovaInspector}'",
+      "presentation": { "reveal": "never" },
+      "dependsOn": ["Run Caldova hosted agent"],
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "openCaldovaInspector",
+      "type": "command",
+      "command": "ai-mlstudio.openTestTool",
+      "args": { "triggeredFrom": "tasks", "port": 8088 }
+    }
+  ]
+}

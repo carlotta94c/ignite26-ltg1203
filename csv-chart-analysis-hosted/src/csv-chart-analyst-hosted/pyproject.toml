@@ -1,0 +1,13 @@
+[project]
+name = "csv-chart-analyst-hosted"
+version = "0.1.0"
+description = "Caldova commercial CSV analysis and charts, hosted with Microsoft Agent Framework."
+requires-python = ">=3.13"
+dependencies = [
+    "agent-framework-foundry",
+    "agent-framework-foundry-hosting>=1.0.0b260813",
+    "azure-ai-projects>=2.0.0",
+    "azure-identity",
+    "debugpy",
+    "python-dotenv",
+]
