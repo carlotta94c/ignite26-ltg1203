@@ -2,8 +2,26 @@
 
 Independent hosted solution named **csv-chart-analyst-hosted**, using the existing
 **gpt-5.4-nano** deployment in **csv-chart-analyst-dev**. No provisioning, deployment,
-model creation, connection creation, or role changes are needed for this local scaffold.
+model creation, connection creation, or role changes are performed by local setup.
 The prompt solution is unchanged and is not imported at runtime.
+
+## Prerequisites
+
+- Python 3.13+ and [uv](https://docs.astral.sh/uv/getting-started/installation/) for local setup.
+- [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli), authenticated to the
+  tenant and subscription that contain the existing project.
+- Azure Developer CLI (`azd`) 1.37.0+ with `azure.ai.agents` and `azure.ai.projects`
+  extensions 1.0.0+ for deployment. Install the extension pack with
+  `azd extension install microsoft.foundry`.
+- PowerShell 7 (`pwsh`) on Windows, or a POSIX shell on macOS/Linux, for the deployment hook.
+- VS Code with Foundry Toolkit and the Python Debugger extension for the included F5 workflow.
+- Permission to deploy hosted agents and assign **Foundry User** at project scope.
+  The local development identity also needs access to inference, Files, and Code Interpreter.
+  The hosted agent uses its own identity, not your local Azure CLI identity.
+
+The [manifest](azure.yaml) uses Python source-code deployment with remote dependency installation.
+Docker and Azure Container Registry are not required. The included
+[Dockerfile](src/csv-chart-analyst-hosted/Dockerfile) is not used by this deployment path.
 
 ## Implementation
 
@@ -30,8 +48,7 @@ The prompt solution is unchanged and is not imported at runtime.
 Local debugging is **not offline**: starting the agent uploads the demo CSV; requests
 use Azure inference and Code Interpreter and can incur charges. Uploaded input/output
 files remain in the project until explicitly removed. Live troubleshooting has verified
-streaming chart generation, publishing, and PNG download against the existing nano
-deployment; no infrastructure was provisioned or deployed.
+streaming chart generation, publishing, and PNG download against the existing nano deployment.
 
 ## Local setup (PowerShell, Python 3.13+)
 
@@ -40,7 +57,10 @@ From the repository root:
 ```powershell
 Set-Location .\csv-chart-analysis-hosted\src\csv-chart-analyst-hosted
 uv sync --frozen
-Copy-Item .env.example .env
+if (-not (Test-Path .env)) {
+    Copy-Item .env.example .env
+}
+az login
 ```
 
 The agent's own `.venv` is used for debugging, independently of the prompt solution.
@@ -101,6 +121,187 @@ If Code Interpreter ran but publishing reports `No completed Code Interpreter ex
 restart the task and start a fresh Inspector conversation. The updated runtime handles
 the raw streaming completion event; the installed SDK's parsed result alone remains
 `in_progress` and previously prevented recording the real container ID.
+
+## Deploy to the existing Foundry project
+
+These commands deploy code and can change role assignments through the post-deploy hook.
+They are separate from local setup. Do not run `azd up` or `azd provision` for this path:
+the project and `gpt-5.4-nano` deployment already exist.
+
+### Configure the azd environment
+
+Start from the repository root in PowerShell. Replace `<subscription-id>` with the
+subscription containing `rg-csv-chart-analyst-dev`:
+
+```powershell
+Set-Location .\csv-chart-analysis-hosted
+$env:AZURE_DEV_USER_AGENT = "microsoft_foundry_skill"
+
+az login
+az account set --subscription "<subscription-id>"
+azd auth login
+azd env list
+azd env select csv-chart-analyst-hosted-dev
+```
+
+If that local azd environment does not exist, use
+`azd env new csv-chart-analyst-hosted-dev --subscription "<subscription-id>"` instead
+of `azd env select`. Creating the local environment does not provision Azure resources.
+Both CLIs must be signed in to the intended tenant.
+
+From the same solution folder:
+
+```powershell
+$subscriptionId = az account show --query id --output tsv
+$tenantId = az account show --query tenantId --output tsv
+$accountId = az cognitiveservices account show `
+    --name cog-aq3tdqdbwqe2u `
+    --resource-group rg-csv-chart-analyst-dev `
+    --subscription $subscriptionId `
+    --query id --output tsv
+
+if ($LASTEXITCODE -ne 0 -or -not $accountId) {
+    throw "Existing Foundry account not found. Check the subscription and tenant."
+}
+
+$projectId = "$accountId/projects/csv-chart-analyst-dev"
+
+azd env set AZURE_SUBSCRIPTION_ID $subscriptionId
+azd env set AZURE_TENANT_ID $tenantId
+azd env set AZURE_AI_PROJECT_ID $projectId
+azd env set FOUNDRY_PROJECT_ENDPOINT "https://cog-aq3tdqdbwqe2u.services.ai.azure.com/api/projects/csv-chart-analyst-dev"
+azd env set AZURE_AI_MODEL_DEPLOYMENT_NAME "gpt-5.4-nano"
+```
+
+These resource names are for this sample's existing project. If targeting another project,
+also update the `ai-project.endpoint` in [azure.yaml](azure.yaml) to match.
+The source directory's local `.env` does not configure azd and is excluded from deployment.
+Use `FOUNDRY_PROJECT_ENDPOINT` as shown; the manifest does not substitute
+`AZURE_AI_PROJECT_ENDPOINT`.
+
+### Preview, deploy, and test
+
+Run from `csv-chart-analysis-hosted`:
+
+```powershell
+# Read-only comparison: does not deploy or execute hooks.
+azd deploy csv-chart-analyst-hosted --preview --no-prompt
+
+# Deploys a new hosted-agent version and runs the role-assignment hook.
+azd deploy csv-chart-analyst-hosted --no-prompt
+
+azd ai agent show csv-chart-analyst-hosted --output json
+```
+
+The CLI packages [the source directory](src/csv-chart-analyst-hosted), excludes
+[.agentignore](src/csv-chart-analyst-hosted/.agentignore) entries, and lets Foundry install
+dependencies from [requirements.txt](src/csv-chart-analyst-hosted/requirements.txt).
+Each deployment creates a new immutable version. A version with status `active` still
+needs a successful session startup and invocation to verify runtime readiness.
+
+After allowing time for role propagation, invoke the deployed agent:
+
+```powershell
+azd ai agent invoke csv-chart-analyst-hosted `
+    "Validate the bundled Caldova CSV, summarize revenue and gross margin by region, and create a PNG showing monthly revenue by category. Return the downloadable file ID." `
+    --protocol responses `
+    --new-session
+```
+
+Expect an analysis response and real `File:` and `Download ID:` values for the PNG.
+Invocation uses the remote hosted agent and incurs normal Azure usage charges.
+See Microsoft's [source-code deployment guide](https://learn.microsoft.com/azure/foundry/agents/how-to/deploy-hosted-agent-code)
+for platform details.
+
+### Download a generated chart
+
+Unlike the prompt solution's client, this solution does not automatically save outputs
+to a local `outputs/` directory. From the hosted solution folder, replace `<file-id>`
+with the returned Foundry file ID:
+
+```powershell
+$projectEndpoint = azd env get-value FOUNDRY_PROJECT_ENDPOINT
+$token = az account get-access-token --resource https://ai.azure.com --query accessToken --output tsv
+if ($LASTEXITCODE -ne 0 -or -not $token) {
+    throw "Failed to obtain an Azure access token."
+}
+
+Invoke-WebRequest `
+    -Uri "$projectEndpoint/openai/v1/files/<file-id>/content" `
+    -Headers @{ Authorization = "Bearer $token" } `
+    -OutFile (Join-Path $env:TEMP "caldova-chart.png")
+
+Remove-Variable token
+```
+
+The caller downloading the file needs project Files access independently of the hosted
+agent's role. Treat file IDs and downloaded files according to your data-handling requirements.
+
+### Deployment permissions
+
+The [manifest](azure.yaml) uses the same post-deploy hook pattern as the prompt
+solution, with independent [PowerShell](scripts/assign-agent-role.ps1) and
+[POSIX shell](scripts/assign-agent-role.sh) scripts. After an explicitly requested
+deployment, the hook resolves this hosted agent's identity and assigns **Foundry User**
+at the existing project's scope, unless that role is already assigned there or
+inherited. It does not create projects or model deployments. The deploying identity
+must be allowed to assign that role; failures stop the hook and are reported.
+
+The hook reads `FOUNDRY_PROJECT_ENDPOINT`, `AZURE_AI_PROJECT_ID`, and the generated
+`AGENT_CSV_CHART_ANALYST_HOSTED_NAME` from the active azd environment. The manifest
+also passes `FOUNDRY_PROJECT_ENDPOINT` to the runtime; the local `.env` is not deployed.
+Local F5 debugging does not run the hook.
+
+If deployment succeeds but the hook fails, resolve the reported permissions or configuration
+issue and rerun only the hook from the hosted solution folder:
+
+```powershell
+$env:AZURE_DEV_USER_AGENT = "microsoft_foundry_skill"
+pwsh -File .\scripts\assign-agent-role.ps1
+```
+
+On macOS/Linux, use `sh ./scripts/assign-agent-role.sh` from the same folder.
+These commands can assign a role; they do not redeploy the agent. The scripts check for
+an existing assignment before creating one.
+
+### Startup and readiness troubleshooting
+
+If a deployed session fails with `424 session_not_ready`, check its console logs.
+From the hosted solution folder:
+
+```powershell
+azd ai agent monitor csv-chart-analyst-hosted --tail 100
+```
+
+The command uses the session saved by the last invocation. To inspect the session
+reported in an error instead:
+
+```powershell
+azd ai agent monitor csv-chart-analyst-hosted --session-id "<session-id>" --tail 100
+azd ai agent monitor csv-chart-analyst-hosted --session-id "<session-id>" --type system --tail 100
+```
+
+A `403` while uploading the bundled CSV means the hosted identity lacks access:
+startup exits before the readiness server starts. After fixing the role assignment,
+allow time for RBAC propagation and invoke with a new session. A successful role
+assignment does not mean permissions are effective immediately.
+
+If logs report a missing `FOUNDRY_PROJECT_ENDPOINT`, verify that the active azd environment
+contains it and that the deployment preview shows a nonempty runtime value, then redeploy.
+Changing only the local `.env` cannot fix an already deployed version.
+For other failures, use the actual startup traceback rather than assuming every `424`
+is a permissions error.
+
+## Data retention and cleanup
+
+The bundled CSV contains synthetic Caldova commercial data, not patient data. Model-generated
+analysis code runs in Foundry Code Interpreter, not on your workstation.
+Uploaded inputs and published outputs are not deleted automatically. Stop local debugging
+with **Tasks: Terminate Task**; this does not remove Azure files or a deployed agent.
+
+This solution reuses a project and model that other agents can share. Do not run
+`azd down --purge` or delete the project as hosted-agent cleanup. Remove only the intended
+hosted-agent versions and project files after checking that no other workflow needs them.
 
 ## Offline validation
 

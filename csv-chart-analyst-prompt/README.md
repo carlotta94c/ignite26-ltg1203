@@ -23,7 +23,7 @@ The Agent focuses on commercial insights and charts, not medical advice or produ
 
 One `azd up` creates:
 
-- a Microsoft Foundry project and `gpt-5.4-mini` deployment;
+- a Microsoft Foundry project and `gpt-5.4-nano` deployment;
 - one Prompt Agent using `harness.type: microsoft_copilot_preview`;
 - native file-read, file-write, and shell capabilities with all other harness built-ins disabled;
   and
@@ -37,7 +37,7 @@ One `azd up` creates:
 - Python 3.9 or later.
 - PowerShell 7 (`pwsh`) on Windows, or a POSIX shell on macOS/Linux, for the post-deploy hook.
 - An Azure subscription with Copilot harness preview access and sufficient quota for the
-  `gpt-5.4-mini` GlobalStandard deployment (capacity 50) in the selected region.
+  `gpt-5.4-nano` GlobalStandard deployment (capacity 50) in the selected region.
 - Permission to create Foundry resources, deploy Agent versions, and assign **Foundry User** at
   project scope. The signed-in Azure CLI user also needs access to the project's Files and Agent APIs.
 
