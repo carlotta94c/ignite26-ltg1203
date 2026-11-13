@@ -28,6 +28,7 @@ from pydantic import Field
 AGENT_NAME = "csv-chart-analyst-hosted"
 MODEL_NAME = "gpt-5.4-nano"
 ROOT = Path(__file__).resolve().parent
+OUTPUT_DIR = ROOT / "outputs"
 logger = logging.getLogger(__name__)
 ARTIFACT_CONTAINER_KEY = "caldova_code_interpreter_container"
 
@@ -103,8 +104,9 @@ def build_agent(
             content = files_client.containers.files.content.retrieve(
                 matches[0].id, container_id=container_id
             )
+            output_bytes = content.read()
             uploaded = files_client.files.create(
-                file=(output_name, content.read()), purpose="assistants"
+                file=(output_name, output_bytes), purpose="assistants"
             )
         except APIError as error:
             logger.exception("Foundry output publishing failed for %s", output_name)
@@ -114,8 +116,22 @@ def build_agent(
                 "If the container expired, regenerate the file with Code Interpreter; "
                 "for access errors, check the existing project's file permissions."
             ) from error
-        logger.info("Published output %s as Foundry file %s", output_name, uploaded.id)
-        return f"File: {output_name}\nDownload ID: {uploaded.id}"
+        output_path = OUTPUT_DIR / output_name
+        try:
+            OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+            output_path.write_bytes(output_bytes)
+        except OSError as error:
+            logger.exception("Failed to save published output to %s", output_path)
+            raise ValueError(
+                f"Published {output_name} as Foundry file {uploaded.id}, "
+                f"but could not save it to {output_path}. Check directory permissions "
+                "and available disk space."
+            ) from error
+        logger.info(
+            "Published output %s as Foundry file %s and saved it to %s",
+            output_name, uploaded.id, output_path,
+        )
+        return f"File: {output_name}\nDownload ID: {uploaded.id}\nSaved to: {output_path}"
 
     original_instructions = (ROOT / "instructions.txt").read_text(encoding="utf-8")
     runtime_instructions = f"""
@@ -136,6 +152,9 @@ this session's completed Code Interpreter execution; never invent or supply thos
 The publisher does not create charts and cannot substitute for Code Interpreter.
 Preserve native file citations
 when available, and always include the exact File: and Download ID: returned by publish_output.
+Also include its exact Saved to: path so the user can find the downloaded file on the
+machine running this agent. Do not describe that path as a browser download link or
+as a file on the user's workstation when the agent is deployed remotely.
 Never present a sandbox path, a container file ID, or the source CSV ID as a downloadable
 Foundry output file ID. If publishing fails, report the error rather than inventing a link.
 """
@@ -147,7 +166,7 @@ Foundry output file ID. If publishing fails, report the error rather than invent
             FoundryChatClient.get_code_interpreter_tool(file_ids=[demo_file_id]),
             publish_output,
         ],
-        default_options={"store": False},
+        default_options={"store": True},
         middleware=[CodeInterpreterArtifacts()],
     )
 

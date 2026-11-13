@@ -15,7 +15,7 @@ Two independent Microsoft Foundry solutions for the same commercial-analysis sce
 | Analysis runtime | Managed Copilot harness with shell and filesystem tools | Custom Python agent with Foundry Code Interpreter |
 | Model deployment | `gpt-5.4-nano` | Reuses the existing `gpt-5.4-nano` |
 | Input workflow | Included client uploads and attaches a CSV | Bundled CSV uploaded at startup; user attachments take precedence |
-| Chart output | Included client downloads PNGs to `outputs/` | Publishes PNGs to Foundry Files and returns downloadable file IDs |
+| Chart output | Included client downloads PNGs to `outputs/` | Publishes PNGs to Foundry Files and saves copies in the agent source directory's `outputs/` during local runs |
 | Local development | Python client calls the deployed agent | Run/debug the agent in VS Code Agent Inspector |
 | Deployment | Can provision a project and model | Source-code deployment to the existing `csv-chart-analyst-dev` project |
 

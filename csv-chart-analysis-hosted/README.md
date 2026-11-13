@@ -36,7 +36,10 @@ Docker and Azure Container Registry are not required. The included
 - The bundled CSV is uploaded to the existing project's Files API at startup and attached
   to Code Interpreter. User attachments take precedence over the demo.
 - Generated charts are copied from Code Interpreter containers to the project's Files API
-  by `publish_output(filename)`, which returns their actual filename and downloadable Foundry file ID.
+  by `publish_output(filename)`, which also saves the same bytes under the agent source
+  directory's `outputs/` folder. It returns the actual filename, downloadable Foundry file ID,
+  and `Saved to:` path. The directory is created automatically, and a repeated filename
+  overwrites the previous local copy. Local write failures are reported explicitly.
   The runtime records the real container ID from completed Code Interpreter results in the
   current agent session, including streamed results. The publisher resolves the generated
   file ID through the container's Files API; the model never supplies infrastructure IDs.
@@ -215,9 +218,19 @@ for platform details.
 
 ### Download a generated chart
 
-Unlike the prompt solution's client, this solution does not automatically save outputs
-to a local `outputs/` directory. From the hosted solution folder, replace `<file-id>`
-with the returned Foundry file ID:
+For local F5 or terminal runs, published charts are saved automatically in
+`csv-chart-analysis-hosted/src/csv-chart-analyst-hosted/outputs/` relative to the repository
+root. Open that folder in VS Code Explorer and click the PNG to preview it. The tool result
+and final answer include `Saved to:` with the full path. Restart the running task after
+updating the code; existing files in Foundry are not downloaded retroactively.
+
+The folder is Git-ignored and excluded from deployment packages. Code generation and
+execution still happen in Foundry Code Interpreter; the local agent only saves the resulting
+file bytes.
+
+For a deployed agent, `outputs/` is on the remote runtime's ephemeral filesystem, not
+your workstation. The durable copy remains in Foundry Files. To download that copy from
+the hosted solution folder, replace `<file-id>` with the returned Foundry file ID:
 
 ```powershell
 $projectEndpoint = azd env get-value FOUNDRY_PROJECT_ENDPOINT
@@ -298,6 +311,8 @@ The bundled CSV contains synthetic Caldova commercial data, not patient data. Mo
 analysis code runs in Foundry Code Interpreter, not on your workstation.
 Uploaded inputs and published outputs are not deleted automatically. Stop local debugging
 with **Tasks: Terminate Task**; this does not remove Azure files or a deployed agent.
+Local copies in the source directory's `outputs/` folder also remain until explicitly
+deleted or overwritten by another output with the same filename.
 
 This solution reuses a project and model that other agents can share. Do not run
 `azd down --purge` or delete the project as hosted-agent cleanup. Remove only the intended

@@ -2,11 +2,12 @@ from __future__ import annotations
 
 import json
 import os
+import tempfile
 import textwrap
 import unittest
 from pathlib import Path
 from types import SimpleNamespace
-from unittest.mock import MagicMock, Mock, patch
+from unittest.mock import AsyncMock, MagicMock, Mock, patch
 
 os.environ["OTEL_SDK_DISABLED"] = "true"
 
@@ -25,7 +26,7 @@ from agent_framework_foundry_hosting import ResponsesHostServer
 from azure.core.credentials import TokenCredential
 import httpx
 from openai import NotFoundError
-from openai.types.responses import ResponseCodeInterpreterToolCall, ResponseOutputItemDoneEvent
+from openai.types.responses import Response, ResponseCodeInterpreterToolCall, ResponseOutputItemDoneEvent
 from starlette.testclient import TestClient
 
 import main
@@ -79,7 +80,14 @@ class PreservationTests(unittest.TestCase):
 
 class AgentTests(unittest.IsolatedAsyncioTestCase):
     def setUp(self) -> None:
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        self.output_dir = Path(temporary.name) / "outputs"
+        output_patch = patch.object(main, "OUTPUT_DIR", self.output_dir)
+        output_patch.start()
+        self.addCleanup(output_patch.stop)
         self.files = Mock()
+        self.files.containers.files.content.retrieve.return_value.read.return_value = b"PNG"
         self.agent = main.build_agent(offline_client(), self.files, "file-demo")
         self.publish = next(
             t for t in self.agent.default_options["tools"]
@@ -114,20 +122,97 @@ class AgentTests(unittest.IsolatedAsyncioTestCase):
         interpreter = self.agent.default_options["tools"][0]
         self.assertEqual(interpreter["type"], "code_interpreter")
         self.assertEqual(interpreter["container"]["file_ids"], ["file-demo"])
-        self.assertFalse(self.agent.default_options["store"])
+        self.assertTrue(self.agent.default_options["store"])
 
     async def test_publish_output_returns_actual_foundry_file_id(self) -> None:
         self.files.containers.files.content.retrieve.return_value.read.return_value = b"PNG"
         self.files.files.create.return_value.id = "file-output"
         result = await self.invoke_publish("revenue.png")
         self.assertEqual(len(result), 1)
-        self.assertEqual(result[0].text, "File: revenue.png\nDownload ID: file-output")
+        self.assertEqual(
+            result[0].text,
+            f"File: revenue.png\nDownload ID: file-output\nSaved to: {self.output_dir / 'revenue.png'}",
+        )
+        self.assertEqual((self.output_dir / "revenue.png").read_bytes(), b"PNG")
         self.files.containers.files.content.retrieve.assert_called_once_with(
             "cfile-generated", container_id="cntr-test"
         )
         self.files.files.create.assert_called_once_with(
             file=("revenue.png", b"PNG"), purpose="assistants"
         )
+
+    async def test_publisher_saves_only_the_generated_basename(self) -> None:
+        for filename in ("../../revenue.png", r"..\..\revenue.png"):
+            with self.subTest(filename=filename):
+                await self.invoke_publish(filename)
+                self.assertEqual((self.output_dir / "revenue.png").read_bytes(), b"PNG")
+                self.assertFalse((self.output_dir.parent / "revenue.png").exists())
+
+    async def test_local_save_failure_reports_the_published_file_id(self) -> None:
+        self.files.files.create.return_value.id = "file-output"
+        with patch.object(Path, "write_bytes", side_effect=PermissionError("read-only")):
+            with self.assertRaisesRegex(ValueError, "Foundry file file-output.*could not save"):
+                await self.invoke_publish("revenue.png")
+
+    async def test_publish_continues_response_with_interpreter_evidence(self) -> None:
+        self.files.containers.files.content.retrieve.return_value.read.return_value = b"PNG"
+        self.files.files.create.return_value.id = "file-output"
+        provider_responses = [
+            Response.model_validate({
+                "id": "resp-calculated", "object": "response", "created_at": 0,
+                "status": "completed", "model": main.MODEL_NAME,
+                "parallel_tool_calls": True, "tool_choice": "auto", "tools": [],
+                "output": [
+                    {
+                        "id": "ci-calculated", "type": "code_interpreter_call",
+                        "status": "completed", "container_id": "cntr-calculated",
+                        "code": "print('Total revenue: 123')",
+                        "outputs": [{"type": "logs", "logs": "Total revenue: 123"}],
+                    },
+                    {
+                        "id": "fc-publish", "type": "function_call",
+                        "call_id": "call-publish", "name": "publish_output",
+                        "arguments": '{"filename": "revenue.png"}',
+                        "status": "completed",
+                    },
+                ],
+            }),
+            Response.model_validate({
+                "id": "resp-final", "object": "response", "created_at": 0,
+                "status": "completed", "model": main.MODEL_NAME,
+                "parallel_tool_calls": True, "tool_choice": "auto", "tools": [],
+                "output": [{
+                    "id": "msg-final", "type": "message", "role": "assistant",
+                    "status": "completed", "content": [{
+                        "type": "output_text", "text": "Total revenue: 123. Chart published.",
+                        "annotations": [],
+                    }],
+                }],
+            }),
+        ]
+        raw_responses = [
+            Mock(headers={}, parse=Mock(return_value=response))
+            for response in provider_responses
+        ]
+        create = AsyncMock(side_effect=raw_responses)
+        with patch.object(
+            self.agent.client.client.responses.with_raw_response, "create", create
+        ):
+            result = await self.agent.run(
+                "Calculate revenue and publish the chart", session=AgentSession()
+            )
+
+        self.assertIn("Total revenue: 123", result.text)
+        self.assertEqual(create.await_count, 2)
+        followup = create.await_args_list[1].kwargs
+        self.assertEqual(followup.get("previous_response_id"), "resp-calculated")
+        self.assertTrue(any(
+            item.get("type") == "function_call_output"
+            and item.get("call_id") == "call-publish"
+            and "file-output" in item.get("output", "")
+            for item in followup["input"]
+        ))
+        self.files.files.create.assert_called_once()
 
     async def test_publish_failure_is_not_reported_as_success(self) -> None:
         self.files.containers.files.list.side_effect = NotFoundError(
