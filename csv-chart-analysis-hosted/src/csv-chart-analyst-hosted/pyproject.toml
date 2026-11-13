@@ -11,3 +11,6 @@ dependencies = [
     "debugpy",
     "python-dotenv",
 ]
+
+[tool.setuptools]
+py-modules = ["main", "inspector"]

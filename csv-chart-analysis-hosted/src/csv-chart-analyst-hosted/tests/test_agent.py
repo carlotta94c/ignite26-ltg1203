@@ -12,6 +12,7 @@ from unittest.mock import AsyncMock, MagicMock, Mock, patch
 os.environ["OTEL_SDK_DISABLED"] = "true"
 
 from agent_framework import (
+    AgentContext,
     AgentResponseUpdate,
     AgentSession,
     ChatContext,
@@ -22,7 +23,6 @@ from agent_framework import (
     Message,
 )
 from agent_framework.foundry import FoundryChatClient
-from agent_framework_foundry_hosting import ResponsesHostServer
 from azure.core.credentials import TokenCredential
 import httpx
 from openai import NotFoundError
@@ -283,7 +283,7 @@ class AgentTests(unittest.IsolatedAsyncioTestCase):
             await self.invoke_publish("revenue.png", AgentSession())
         self.files.containers.files.list.assert_called_once_with(container_id="cntr-test")
 
-    async def check_model_loop(self, stream: bool) -> None:
+    async def check_model_loop(self, stream: bool, hosted: bool = False) -> None:
         self.files.files.create.return_value.id = "file-output"
         self.files.containers.files.content.retrieve.return_value.read.return_value = b"PNG"
         execution = ResponseCodeInterpreterToolCall(
@@ -300,6 +300,7 @@ class AgentTests(unittest.IsolatedAsyncioTestCase):
                 ),
             ],
             [Content.from_text("Chart published.")],
+            [Content.from_text("The chart uses the generated output.")],
         ])
 
         def raw_response(**kwargs):
@@ -337,8 +338,51 @@ class AgentTests(unittest.IsolatedAsyncioTestCase):
                 return ChatResponse(messages=[Message(role="assistant", contents=contents)])
             return response()
 
-        with patch.object(self.agent.client, "_inner_get_response", side_effect=raw_response):
-            if stream:
+        with patch.object(
+            self.agent.client, "_inner_get_response", side_effect=raw_response
+        ) as provider:
+            if hosted:
+                with TestClient(main.InspectorResponsesHostServer(self.agent)) as http:
+                    first = http.post("/responses", json={
+                        "input": "Generate and publish revenue.png",
+                        "stream": True,
+                        "store": True,
+                    })
+                    self.assertEqual(first.status_code, 200, first.text)
+                    events = [
+                        json.loads(line[6:]) for line in first.text.splitlines()
+                        if line.startswith("data: ") and line[6:] != "[DONE]"
+                    ]
+                    self.assertEqual(events[-1]["type"], "response.completed", first.text)
+                    items = [
+                        event["item"] for event in events
+                        if event["type"] == "response.output_item.done"
+                    ]
+                    calls = [item for item in items if item["type"] == "function_call"]
+                    self.assertEqual(
+                        [item["name"] for item in calls], ["code_interpreter", "publish_output"]
+                    )
+                    self.assertEqual(calls[0]["call_id"], execution.id)
+                    self.assertEqual(json.loads(calls[0]["arguments"]), {
+                        "code": execution.code, "container_id": execution.container_id
+                    })
+                    result = next(
+                        item for item in items
+                        if item["type"] == "function_call_output"
+                        and item["call_id"] == execution.id
+                    )
+                    self.assertEqual(json.loads(result["output"]), execution.model_dump())
+                    self.assertEqual(result["status"], "completed")
+                    second = http.post("/responses", json={
+                        "input": "Explain the chart.",
+                        "previous_response_id": events[-1]["response"]["id"],
+                        "stream": False,
+                        "store": False,
+                    })
+                    self.assertEqual(second.status_code, 200, second.text)
+                    self.assertEqual(second.json()["status"], "completed", second.text)
+                self.assertEqual(provider.call_count, 3)
+            elif stream:
                 updates = [
                     update async for update in self.agent.run(
                         "Generate and publish revenue.png", stream=True, session=AgentSession()
@@ -349,6 +393,15 @@ class AgentTests(unittest.IsolatedAsyncioTestCase):
                 await self.agent.run(
                     "Generate and publish revenue.png", session=AgentSession()
                 )
+            for call in provider.call_args_list:
+                for message in call.kwargs["messages"]:
+                    for content in message.contents:
+                        self.assertFalse(
+                            content.type == "function_call" and content.name == "code_interpreter"
+                        )
+                        self.assertFalse(
+                            content.type == "function_result" and content.call_id == execution.id
+                        )
         self.files.containers.files.list.assert_called_once_with(
             container_id="cntr-from-service"
         )
@@ -364,6 +417,28 @@ class AgentTests(unittest.IsolatedAsyncioTestCase):
 
     async def test_streaming_model_loop_resolves_actual_code_interpreter_ids(self) -> None:
         await self.check_model_loop(stream=True)
+
+    async def test_hosted_cards_preserve_order_and_do_not_replay_into_model(self) -> None:
+        await self.check_model_loop(stream=True, hosted=True)
+
+    async def test_display_result_is_filtered_even_when_call_was_trimmed_from_history(self) -> None:
+        self.session.state[main.DISPLAY_CALL_IDS_KEY] = ["ci-trimmed"]
+        original = Message(role="tool", contents=[
+            Content.from_function_result(call_id="ci-trimmed", result="display-only output"),
+            Content.from_function_result(call_id="call-publish", result="File: revenue.png"),
+        ])
+        user = Message(role="user", contents=[Content.from_text("Explain the result.")])
+        context = AgentContext(
+            agent=self.agent, messages=[original, user], session=self.session
+        )
+        call_next = AsyncMock()
+        await main.InspectorHistoryFilter().process(context, call_next)
+        call_next.assert_awaited_once()
+        self.assertEqual(len(original.contents), 2)
+        self.assertEqual(
+            [content.call_id for content in context.messages[0].contents], ["call-publish"]
+        )
+        self.assertIs(context.messages[1], user)
 
     async def test_unfinished_streamed_execution_is_not_recorded(self) -> None:
         for status in ("in_progress", "failed", "incomplete"):
@@ -448,7 +523,7 @@ class StartupTests(unittest.TestCase):
             patch.object(main, "DefaultAzureCredential", return_value=credential),
             patch.object(main, "AIProjectClient") as project_factory,
             patch.object(main, "FoundryChatClient", wraps=FoundryChatClient) as client_factory,
-            patch.object(main, "ResponsesHostServer") as server,
+            patch.object(main, "InspectorResponsesHostServer") as server,
         ):
             project_factory.return_value.__enter__.return_value = project
             main.main()
@@ -477,7 +552,7 @@ class ProtocolTests(unittest.TestCase):
             )
 
         with patch.object(agent, "run", return_value=offline_updates()):
-            with TestClient(ResponsesHostServer(agent)) as http:
+            with TestClient(main.InspectorResponsesHostServer(agent)) as http:
                 self.assertEqual(http.get("/readiness").status_code, 200)
                 response = http.post("/responses", json={
                     "input": "Validate the demo and chart monthly revenue.",
@@ -500,7 +575,7 @@ class ProtocolTests(unittest.TestCase):
             )
 
         with patch.object(agent, "run", return_value=offline_updates()):
-            with TestClient(ResponsesHostServer(agent)) as http:
+            with TestClient(main.InspectorResponsesHostServer(agent)) as http:
                 response = http.post("/responses", json={
                     "input": "Analyze monthly revenue.",
                     "stream": True,
@@ -511,6 +586,105 @@ class ProtocolTests(unittest.TestCase):
                 self.assertIn("response.output_text.delta", response.text)
                 self.assertIn("Streaming smoke test.", response.text)
                 self.assertIn("response.completed", response.text)
+
+    def test_interpreter_chunks_and_duplicate_results_produce_one_card(self) -> None:
+        events = self.interpreter_events("completed")
+        calls = [
+            event["item"] for event in events
+            if event["type"] == "response.output_item.added"
+            and event["item"]["type"] == "function_call"
+        ]
+        self.assertEqual(len(calls), 1)
+        self.assertEqual(calls[0]["call_id"], "ci-display")
+        results = [
+            event["item"] for event in events
+            if event["type"] == "response.output_item.done"
+            and event["item"]["type"] == "function_call_output"
+        ]
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0]["status"], "completed")
+        self.assertEqual(
+            json.loads(results[0]["output"])["outputs"],
+            [{"type": "logs", "logs": "Caldova\n"}],
+        )
+        arguments = next(
+            event["arguments"] for event in events
+            if event["type"] == "response.function_call_arguments.done"
+        )
+        self.assertEqual(json.loads(arguments)["code"], 'print("Caldova")\n')
+        self.assertEqual(events[-1]["type"], "response.completed")
+        self.assertEqual(
+            [event["sequence_number"] for event in events],
+            sorted({event["sequence_number"] for event in events}),
+        )
+
+    def test_unsuccessful_interpreter_calls_are_error_results(self) -> None:
+        for status in ("failed", "incomplete", None):
+            with self.subTest(status=status):
+                events = self.interpreter_events(status)
+                results = [
+                    event["item"] for event in events
+                    if event["type"] == "response.output_item.done"
+                    and event["item"]["type"] == "function_call_output"
+                ]
+                self.assertEqual(len(results), 1)
+                self.assertEqual(results[0]["status"], "incomplete")
+                self.assertEqual(
+                    json.loads(results[0]["output"])["status"], status or "incomplete"
+                )
+                final = events[-1]["response"]["output"]
+                self.assertEqual(
+                    next(item for item in final if item["type"] == "function_call_output")["status"],
+                    "incomplete",
+                )
+
+    def interpreter_events(self, status: str | None) -> list[dict]:
+        agent = main.build_agent(offline_client(), Mock(), "file-demo")
+        execution = ResponseCodeInterpreterToolCall(
+            id="ci-display", type="code_interpreter_call", status="in_progress",
+            code=None, container_id="cntr-display", outputs=[],
+        )
+
+        async def offline_updates():
+            yield AgentResponseUpdate(
+                contents=[Content.from_code_interpreter_tool_result(
+                    call_id=execution.id, raw_representation=execution
+                )], role="assistant",
+            )
+            for fragment in ('print("', 'Caldova")\n'):
+                yield AgentResponseUpdate(
+                    contents=[Content.from_code_interpreter_tool_call(
+                        call_id=execution.id, inputs=[Content.from_text(fragment)]
+                    )], role="assistant",
+                )
+            if status is not None:
+                completed = ResponseCodeInterpreterToolCall.model_validate({
+                    **execution.model_dump(),
+                    "status": status,
+                    "code": 'print("Caldova")\n',
+                    "outputs": [{"type": "logs", "logs": "Caldova\n"}],
+                })
+                for _ in range(2):
+                    yield AgentResponseUpdate(
+                        contents=[Content.from_code_interpreter_tool_result(
+                            call_id=execution.id, raw_representation=completed
+                        )], role="assistant",
+                    )
+            yield AgentResponseUpdate(
+                contents=[Content.from_text("Analysis finished.")], role="assistant",
+                message_id="msg-display", response_id="resp-display",
+            )
+
+        with patch.object(agent, "run", return_value=offline_updates()):
+            with TestClient(main.InspectorResponsesHostServer(agent)) as http:
+                response = http.post("/responses", json={
+                    "input": "Analyze revenue.", "stream": True, "store": False,
+                })
+                self.assertEqual(response.status_code, 200, response.text)
+        return [
+            json.loads(line[6:]) for line in response.text.splitlines()
+            if line.startswith("data: ") and line[6:] != "[DONE]"
+        ]
 
 
 if __name__ == "__main__":

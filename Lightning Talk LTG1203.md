@@ -168,39 +168,36 @@ Do not provision or deploy yet.
 
 ## 7. Analyze hosted agent code
 
-**Action:** Open the [hosted solution](csv-chart-analyst-hosted/README.md).
-Compare its [deployment definition](csv-chart-analyst-hosted/azure.yaml) with the
+**Action:** Open the [hosted solution](csv-chart-analysis-hosted/README.md).
+Compare its [deployment definition](csv-chart-analysis-hosted/azure.yaml) with the
 [prompt definition](csv-chart-analyst-prompt/azure.yaml). Show the unchanged
-[instructions](csv-chart-analyst-hosted/src/csv-chart-analyst-hosted/instructions.txt),
-then [main.py](csv-chart-analyst-hosted/src/csv-chart-analyst-hosted/main.py) and
-[analyst.py](csv-chart-analyst-hosted/src/csv-chart-analyst-hosted/analyst.py).
+[instructions](csv-chart-analysis-hosted/src/csv-chart-analyst-hosted/instructions.txt),
+then [main.py](csv-chart-analysis-hosted/src/csv-chart-analyst-hosted/main.py).
 
 > "The business instructions and synthetic data are unchanged. What moves into our code is the
-> orchestration: staging uploaded files, executing Python, publishing charts, and handling errors.
-> This is a new hosted agent named csv-chart-analyst-hosted, using the existing GPT-5.4-mini
+> orchestration: staging the demo CSV, configuring Code Interpreter, publishing charts, and handling errors.
+> This is a new hosted agent named csv-chart-analyst-hosted, using the existing GPT-5.4-nano
 > deployment. We have not provisioned or deployed it."
 
 **Optional:** After local setup, press F5 with **Debug Caldova Hosted Agent** to open Agent
-Inspector. Local inference uses the existing Foundry project; Python runs locally, so this is a
-trusted-user demo, not an isolation boundary for untrusted code.
+Inspector. The local server calls the existing Foundry model and managed Code Interpreter;
+it does not execute the generated analysis code locally.
 **Action:** Review the generated hosted agent code to understand how the conversion preserved the grounding data, instructions, and model configuration.
 
-**Show:** [hosted deployment definition](csv-chart-analyst-hosted/azure.yaml), [main.py](csv-chart-analyst-hosted/src/csv-chart-analyst-hosted/main.py), [analyst.py](csv-chart-analyst-hosted/src/csv-chart-analyst-hosted/analyst.py), and [instructions.txt](csv-chart-analyst-hosted/src/csv-chart-analyst-hosted/instructions.txt).
+**Short analysis of [main.py](csv-chart-analysis-hosted/src/csv-chart-analyst-hosted/main.py):**
 
-| Surface | What to point out |
+| Code | What to point out |
 | --- | --- |
-| Hosting and model | The hosted definition declares `kind: hosted`, Responses protocol `2.0.0`, and `python main.py`. `AZURE_AI_MODEL_DEPLOYMENT_NAME` selects the existing `gpt-5.4-mini` deployment; the code calls that model directly rather than creating another Prompt Agent. |
-| Request handling | `main.py` registers a `ResponsesAgentServerHost` handler, combines conversation history with the current input, authenticates with `DefaultAzureCredential`, and calls `analyze`. It emits response lifecycle events, the final answer, and explicit failure or cancellation events. |
-| Instructions | `instructions.txt` preserves the prompt solution's base instructions. `analyze` appends runtime-specific guidance describing `INPUT_FILES`, `OUTPUT_DIR`, and the two hosted tools, without replacing the commercial-analysis rules. |
-| Grounding data | `prepare_messages` stages CSV attachments referenced by Foundry `file_id`. With no attachment, it selects the bundled [regional-sales.csv](csv-chart-analyst-hosted/src/csv-chart-analyst-hosted/sample-data/regional-sales.csv), which is identical to the prompt sample. This makes a text-only Inspector demo possible; it is not proof that uploads work. |
-| Tool orchestration | `analyze` owns a bounded loop of up to 12 model/tool rounds. `run_python` executes model-generated Python in a temporary workspace; tool output is sent back to the model. Input hashes detect changes to staged CSVs. This replaces the managed harness's native shell/file execution. |
-| Chart handoff | `publish_file` validates a PNG in the output directory, uploads it to Foundry Files, and returns its real file ID. The final answer includes `File:` and `Download ID:`; the temporary workspace is removed after the turn. |
+| Startup: `main` | Loads `.env`, validates the endpoint and model setting, and authenticates with `DefaultAzureCredential`. It uploads the bundled CSV, creates a `FoundryChatClient` using `gpt-5.4-nano` by default, and starts `ResponsesHostServer` on port 8088 by default. |
+| Agent assembly: `build_agent` | Preserves `instructions.txt` and appends runtime guidance. The Agent Framework agent receives two tools: managed Code Interpreter for CSV calculations and charts, and `publish_output` for artifact delivery. |
+| Execution evidence: `CodeInterpreterArtifacts` | Middleware records the real container ID from completed Code Interpreter calls in session state, including streamed completion events. Publishing therefore uses execution evidence rather than model-supplied IDs. |
+| Chart handoff: `publish_output` | Finds exactly one assistant-generated file matching the requested filename in that container, uploads its bytes to Foundry Files, and saves a local copy under `outputs`. It returns `File:`, `Download ID:`, and `Saved to:`; failures are logged and surfaced explicitly. |
 
 > "The business contract stays the same: use the CSV as evidence, calculate gross profit correctly, avoid clinical claims, and return a real chart.
 >
-> What changes is ownership. The managed harness previously handled tool execution; now we own the tool loop, workspace, file publishing, dependencies, and error handling. Hosting custom code gives us control, not automatic production hardening."
+> What changes is ownership. Our code now assembles the agent, tracks execution evidence, and publishes artifacts. Agent Framework handles orchestration, while managed Code Interpreter runs the analysis. Hosting custom code gives us control, not automatic production hardening."
 
-**Caveats to mention:** Python's `-I` flag, a reduced subprocess environment, and input hashes are not an OS security sandbox. Run this sample only with trusted demo inputs in an isolated development environment. The handler emits the answer after analysis completes; it does not stream the underlying model's tokens or forward its internal tool calls.
+**Caveats to mention:** The bundled CSV enables a text-only demo; it does not verify user uploads. `Saved to:` refers to the machine running the hosted server, not necessarily the user's workstation.
 
 ## 8. Test the hosted agent with Agent Inspector
 

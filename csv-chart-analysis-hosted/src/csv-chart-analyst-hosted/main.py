@@ -3,6 +3,7 @@ from __future__ import annotations
 import logging
 import os
 from collections.abc import Awaitable, Callable, Sequence
+from copy import copy
 from pathlib import Path
 from typing import Annotated
 
@@ -17,13 +18,14 @@ from agent_framework import (
     tool,
 )
 from agent_framework.foundry import FoundryChatClient
-from agent_framework_foundry_hosting import ResponsesHostServer
 from azure.ai.projects import AIProjectClient
 from azure.identity import DefaultAzureCredential
 from dotenv import load_dotenv
 from openai import APIError, APIStatusError, OpenAI
 from openai.types.responses import ResponseCodeInterpreterToolCall, ResponseOutputItemDoneEvent
 from pydantic import Field
+
+from inspector import DISPLAY_CALL_IDS_KEY, InspectorHistoryFilter, InspectorResponsesHostServer
 
 AGENT_NAME = "csv-chart-analyst-hosted"
 MODEL_NAME = "gpt-5.4-nano"
@@ -38,9 +40,14 @@ class CodeInterpreterArtifacts(ChatMiddleware):
         self, context: ChatContext, call_next: Callable[[], Awaitable[None]]
     ) -> None:
         def remember_execution(raw: object) -> None:
-            if isinstance(raw, ResponseCodeInterpreterToolCall) and raw.status == "completed":
-                if context.session is None:
-                    raise RuntimeError("Code Interpreter results require an agent session.")
+            if not isinstance(raw, ResponseCodeInterpreterToolCall):
+                return
+            if context.session is None:
+                raise RuntimeError("Code Interpreter results require an agent session.")
+            display_ids = context.session.state.setdefault(DISPLAY_CALL_IDS_KEY, [])
+            if raw.id not in display_ids:
+                display_ids.append(raw.id)
+            if raw.status == "completed":
                 context.session.state[ARTIFACT_CONTAINER_KEY] = raw.container_id
 
         def remember(contents: Sequence[Content]) -> None:
@@ -51,7 +58,16 @@ class CodeInterpreterArtifacts(ChatMiddleware):
         def capture_update(update: ChatResponseUpdate) -> ChatResponseUpdate:
             # The SDK parses the added (in-progress) item, but not its completed snapshot.
             if isinstance(update.raw_representation, ResponseOutputItemDoneEvent):
-                remember_execution(update.raw_representation.item)
+                item = update.raw_representation.item
+                remember_execution(item)
+                if isinstance(item, ResponseCodeInterpreterToolCall):
+                    update = copy(update)
+                    update.contents = [
+                        *update.contents,
+                        Content.from_code_interpreter_tool_result(
+                            call_id=item.id, raw_representation=item
+                        ),
+                    ]
             remember(update.contents)
             return update
 
@@ -167,7 +183,7 @@ Foundry output file ID. If publishing fails, report the error rather than invent
             publish_output,
         ],
         default_options={"store": True},
-        middleware=[CodeInterpreterArtifacts()],
+        middleware=[InspectorHistoryFilter(), CodeInterpreterArtifacts()],
     )
 
 
@@ -193,7 +209,7 @@ def main() -> None:
                     function_invocation_configuration={"include_detailed_errors": True},
                 )
                 agent = build_agent(client, files_client, demo.id)
-                ResponsesHostServer(agent).run(
+                InspectorResponsesHostServer(agent).run(
                     host=os.environ.get("HOST", "0.0.0.0"),
                     port=int(os.environ.get("PORT", "8088")),
                 )

@@ -82,12 +82,31 @@ VS Code. Breakpoints can be set in `build_agent` and `publish_output`.
 Set a startup breakpoint before F5 to inspect initial configuration.
 
 This agent already exposes HTTP `/responses` and `/readiness` endpoints through
-`ResponsesHostServer`. Agent Inspector works with that server directly; `agentdev`
+an Inspector-compatible `ResponsesHostServer` subclass. Agent Inspector works with that server directly; `agentdev`
 is not required. The currently published `agent-dev-cli` version `0.0.1b260427`
 requires `agent-framework-core>=1.1.1,<1.3.0`, whereas this project's hosting SDK
 requires `agent-framework-core>=1.13.0`. Installing them together is unsupported.
 Do not bypass dependency checks or downgrade the working hosting stack just to add
 the CLI. The F5 configuration therefore launches the HTTP entrypoint with `debugpy`.
+
+The [Inspector adapter](src/csv-chart-analyst-hosted/inspector.py) displays actual
+Foundry Code Interpreter activity as a `code_interpreter` tool card before
+`publish_output`. Expand the card to inspect the executed Python, real call and
+container IDs, execution status, and outputs/logs. Failed or incomplete executions
+are marked as error results; a missing terminal event is not reported as success.
+Repeated code fragments/completion events do not create duplicate cards.
+
+These are display-only projections into Inspector's function-call protocol, not
+an additional executable tool. They are produced after the model's tool loop and
+removed from replayed HTTP history before the next model request. The native
+Code Interpreter and stored Foundry response continuation remain unchanged.
+This compatibility adapter uses the hosting SDK's internal output-tracker seam;
+rerun the protocol tests when upgrading that SDK or Foundry Toolkit.
+It does not add inline image rendering: open the downloaded PNG in the local
+`outputs` folder.
+
+After updating the code, terminate **Run Caldova hosted agent**, press **F5**, and
+start a fresh Inspector conversation to load the adapter.
 
 Example request:
 
