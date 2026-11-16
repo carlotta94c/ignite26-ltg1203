@@ -7,6 +7,7 @@ Two independent Microsoft Foundry solutions for the same commercial-analysis sce
 | [Prompt agent](csv-chart-analyst-prompt/README.md) | Foundry-managed Microsoft Copilot harness | [azure.yaml](csv-chart-analyst-prompt/azure.yaml), [chat.py](csv-chart-analyst-prompt/chat.py) |
 | [Hosted agent](csv-chart-analysis-hosted/README.md) | Microsoft Agent Framework, Responses protocol | [azure.yaml](csv-chart-analysis-hosted/azure.yaml), [main.py](csv-chart-analysis-hosted/src/csv-chart-analyst-hosted/main.py) |
 
+Those samples have been created starting from the following [official template](https://github.com/microsoft-foundry/foundry-samples/tree/46de18c3b4f1bd861646fa063f29c3c8a039b942/samples/cli/prompt-agents/microsoft-copilot-harness/csv-chart-analyst).
 ## Choose a solution
 
 | | Prompt solution | Hosted solution |
